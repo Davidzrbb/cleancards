@@ -10,7 +10,7 @@ import static io.vavr.API.Valid;
 
 public interface CardsPackTypeValidator {
     static Validation<ApplicationError, CardsPackType> validate(CardsPackType cardsPackType) {
-        return cardsPackType == CardsPackType.Argent || cardsPackType == CardsPackType.Diamant
+        return cardsPackType == CardsPackType.Argent || cardsPackType == CardsPackType.Diamond
                 ? Valid(cardsPackType)
                 : Invalid(new ApplicationError("Invalid CardsPack Type", null, cardsPackType, null));
     }

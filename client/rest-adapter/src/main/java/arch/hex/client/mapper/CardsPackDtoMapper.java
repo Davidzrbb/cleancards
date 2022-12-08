@@ -1,6 +1,6 @@
 package arch.hex.client.mapper;
 
-import arch.hex.client.dto.CardsPackDto;
+import arch.hex.client.dto.cards_pack_dto.CardsPackDto;
 import arch.hex.domain.functional.enums.CardsPackType;
 import arch.hex.domain.functional.model.CardsPack;
 

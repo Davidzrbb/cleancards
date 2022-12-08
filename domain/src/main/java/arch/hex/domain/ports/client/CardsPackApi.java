@@ -7,5 +7,5 @@ import io.vavr.control.Either;
 
 
 public interface CardsPackApi {
-    Either<ApplicationError, CardsPack> cardsPackCreatorService(CardsPackType cardsPackType);
+    Either<ApplicationError, CardsPack> create(CardsPackType cardsPackType);
 }
