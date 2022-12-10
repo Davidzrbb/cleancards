@@ -3,7 +3,7 @@ package arch.hex.domain.functional.service.hero_services;
 import arch.hex.domain.ApplicationError;
 import arch.hex.domain.functional.model.Hero;
 import arch.hex.domain.functional.service.IdGenerationService;
-import arch.hex.domain.ports.client.HeroApi;
+import arch.hex.domain.ports.client.hero_api.HeroCreatorApi;
 import arch.hex.domain.ports.server.HeroPersistenceSpi;
 import io.vavr.control.Either;
 import lombok.RequiredArgsConstructor;
@@ -11,7 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RequiredArgsConstructor
-public class HeroCreatorService implements HeroApi {
+public class HeroCreatorCreatorService implements HeroCreatorApi {
 
     private final HeroPersistenceSpi heroPersistenceSpi;
 

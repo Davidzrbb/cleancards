@@ -6,7 +6,10 @@ import arch.hex.domain.ports.server.HeroPersistenceSpi;
 import arch.hex.server.mapper.CardsPackEntityMapper;
 import arch.hex.server.mapper.HeroEntityMapper;
 import arch.hex.server.repository.HeroRepository;
+import io.vavr.collection.HashSet;
+import io.vavr.collection.Set;
 import io.vavr.control.Either;
+import io.vavr.control.Option;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
 import org.springframework.stereotype.Service;
@@ -26,5 +29,14 @@ public class HeroDataBaseAdapter implements HeroPersistenceSpi {
                 .toEither()
                 .mapLeft(throwable -> new ApplicationError("Unable to save cards pack", null, hero, throwable))
                 .map(HeroEntityMapper::toDomain);
+    }
+
+    @Override
+    public Option<Set<Hero>> findAll() {
+        return Option.of(heroRepository.findAll())
+                .map(heroEntities -> heroEntities
+                                .stream()
+                                .map(HeroEntityMapper::toDomain)
+                                .collect(HashSet.collector()));
     }
 }

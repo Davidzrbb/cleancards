@@ -4,6 +4,7 @@ import arch.hex.client.dto.hero_dto.HeroDto;
 import arch.hex.domain.functional.enums.Rarity;
 import arch.hex.domain.functional.enums.Speciality;
 import arch.hex.domain.functional.model.Hero;
+import io.vavr.collection.Set;
 
 public interface HeroDtoMapper {
 
@@ -19,6 +20,10 @@ public interface HeroDtoMapper {
                 hero.getPower(),
                 hero.getArmor()
         );
+    }
+
+    static Set<HeroDto> toDto(Set<Hero> heroes) {
+        return heroes.map(HeroDtoMapper::toDto);
     }
 
     static Hero heroCreationToDomain(String name, Speciality speciality, Rarity rarity) {

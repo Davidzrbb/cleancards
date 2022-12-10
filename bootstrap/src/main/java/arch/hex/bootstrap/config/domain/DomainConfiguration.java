@@ -2,9 +2,11 @@ package arch.hex.bootstrap.config.domain;
 
 import arch.hex.domain.functional.service.IdGenerationService;
 import arch.hex.domain.functional.service.cards_pack_services.CardsPackCreatorService;
-import arch.hex.domain.functional.service.hero_services.HeroCreatorService;
+import arch.hex.domain.functional.service.hero_services.HeroCreatorCreatorService;
+import arch.hex.domain.functional.service.hero_services.HeroFinderService;
 import arch.hex.domain.ports.client.CardsPackApi;
-import arch.hex.domain.ports.client.HeroApi;
+import arch.hex.domain.ports.client.hero_api.HeroCreatorApi;
+import arch.hex.domain.ports.client.hero_api.HeroFinderApi;
 import arch.hex.domain.ports.server.CardsPackPersistenceSpi;
 import arch.hex.domain.ports.server.HeroPersistenceSpi;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -28,8 +30,13 @@ public class DomainConfiguration {
     }
 
     @Bean
-    public HeroApi heroCreatorService(HeroPersistenceSpi spi, IdGenerationService idGenerationService) {
-        return new HeroCreatorService(spi, idGenerationService);
+    public HeroCreatorApi heroCreatorService(HeroPersistenceSpi spi, IdGenerationService idGenerationService) {
+        return new HeroCreatorCreatorService(spi, idGenerationService);
+    }
+
+    @Bean
+    public HeroFinderApi heroFinderService(HeroPersistenceSpi spi) {
+        return new HeroFinderService(spi);
     }
 
 }
