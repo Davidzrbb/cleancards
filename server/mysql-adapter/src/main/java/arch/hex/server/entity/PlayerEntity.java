@@ -1,17 +1,20 @@
 package arch.hex.server.entity;
 
 import com.sun.istack.NotNull;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.UUID;
 
 @Entity
+@Getter
+@Setter
+@Builder
+@AllArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @NoArgsConstructor
 @Data
-public class Player {
+public class PlayerEntity {
     @Id
     @EqualsAndHashCode.Include
     private UUID idPlayer;

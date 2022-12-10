@@ -11,4 +11,6 @@ import java.util.UUID;
 public class Deck {
     @Default
     UUID idDeck = UUID.randomUUID();
+    Player player;
+    Hero hero;
 }

@@ -1,14 +1,19 @@
 package arch.hex.server.entity;
 
+import arch.hex.domain.functional.model.Hero;
+import arch.hex.domain.functional.model.Player;
 import com.sun.istack.NotNull;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.UUID;
 
 @Entity
+@Getter
+@Setter
+@Builder
+@AllArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @NoArgsConstructor
 @Data
 public class DeckEntity {
@@ -19,7 +24,7 @@ public class DeckEntity {
     @ManyToOne
     @JoinColumn(name = "idPlayer")
     @NotNull
-    Player player;
+    PlayerEntity player;
 
     @ManyToOne
     @JoinColumn(name = "idHero")
