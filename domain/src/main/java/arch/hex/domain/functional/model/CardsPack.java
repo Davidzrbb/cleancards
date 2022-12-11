@@ -11,7 +11,7 @@ import java.util.UUID;
 @Builder
 public class CardsPack {
     @Default
-    UUID idCardsPack = UUID.randomUUID();
+    String idCardsPack = UUID.randomUUID().toString();
     Integer requiredTokens;
     Integer cardsNumber;
     CardsPackType cardsPackType;

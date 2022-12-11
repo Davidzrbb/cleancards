@@ -17,7 +17,7 @@ import java.util.UUID;
 public class PlayerEntity {
     @Id
     @EqualsAndHashCode.Include
-    private UUID idPlayer;
+    private String idPlayer;
 
     @NotNull
     private String pseudo;

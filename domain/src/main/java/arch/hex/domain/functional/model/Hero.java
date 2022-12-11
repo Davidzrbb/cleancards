@@ -13,7 +13,7 @@ import java.util.UUID;
 @Builder
 public class Hero {
     @Default
-    UUID idHero = UUID.randomUUID();
+    String idHero = UUID.randomUUID().toString();
     String name;
     Speciality speciality;
     Rarity rarity;

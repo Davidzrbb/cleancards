@@ -4,6 +4,7 @@ import arch.hex.client.dto.cards_pack_dto.CardsPackDto;
 import arch.hex.domain.functional.enums.CardsPackType;
 import arch.hex.domain.functional.model.CardsPack;
 
+
 public interface CardsPackDtoMapper {
 
     static CardsPackDto toDto(CardsPack cardsPack) {

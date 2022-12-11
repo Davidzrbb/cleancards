@@ -18,7 +18,7 @@ import java.util.UUID;
 public class CardsPackEntity {
     @Id
     @EqualsAndHashCode.Include
-    UUID idCardsPack;
+    String idCardsPack;
     @NotNull
     private Integer requiredTokens;
     @NotNull

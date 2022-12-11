@@ -8,7 +8,7 @@ import java.util.UUID;
 import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.ANY;
 
 @JsonAutoDetect(fieldVisibility = ANY)
-public record CardsPackDto(UUID idCardsPack,
+public record CardsPackDto(String idCardsPack,
                            Integer requiredTokens,
                            Integer cardsNumber,
                            CardsPackType cardsPackType,

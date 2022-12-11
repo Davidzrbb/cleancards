@@ -9,7 +9,7 @@ import java.util.UUID;
 import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.ANY;
 
 @JsonAutoDetect(fieldVisibility = ANY)
-public record HeroDto(UUID idHero,
+public record HeroDto(String idHero,
                       String name,
                       Speciality speciality,
                       Rarity rarity,

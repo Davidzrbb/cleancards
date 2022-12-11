@@ -14,7 +14,7 @@ import java.util.UUID;
 public class FightEntity {
     @Id
     @EqualsAndHashCode.Include
-    private UUID idFight;
+    private String idFight;
 
     @ManyToOne
     @JoinColumn(name = "idHeroAlly")

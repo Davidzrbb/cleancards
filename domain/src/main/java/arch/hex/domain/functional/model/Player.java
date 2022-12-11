@@ -11,7 +11,7 @@ import java.util.UUID;
 @Builder
 public class Player {
     @Default
-    UUID idPlayer = UUID.randomUUID();
+    String idPlayer = UUID.randomUUID().toString();
     String pseudo;
 
     @Default

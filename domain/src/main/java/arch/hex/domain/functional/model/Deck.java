@@ -3,6 +3,7 @@ package arch.hex.domain.functional.model;
 import lombok.Builder;
 import lombok.Builder.Default;
 import lombok.Value;
+import lombok.With;
 
 import java.util.UUID;
 
@@ -10,7 +11,8 @@ import java.util.UUID;
 @Builder
 public class Deck {
     @Default
-    UUID idDeck = UUID.randomUUID();
+    String idDeck = UUID.randomUUID().toString();
     Player player;
+    @With
     Hero hero;
 }

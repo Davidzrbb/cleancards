@@ -19,7 +19,7 @@ import java.util.UUID;
 public class HeroEntity {
     @Id
     @EqualsAndHashCode.Include
-    private UUID idHero;
+    private String idHero;
     @NotNull
     private String name;
     @NotNull

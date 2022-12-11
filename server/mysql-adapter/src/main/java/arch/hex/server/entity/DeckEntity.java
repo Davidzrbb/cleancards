@@ -19,7 +19,7 @@ import java.util.UUID;
 public class DeckEntity {
     @Id
     @EqualsAndHashCode.Include
-    private UUID idDeck;
+    private String idDeck;
 
     @ManyToOne
     @JoinColumn(name = "idPlayer")

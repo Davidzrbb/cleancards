@@ -1,11 +1,9 @@
-package arch.hex.domain.ports.client;
+package arch.hex.domain.ports.client.player_api;
 
 import arch.hex.domain.ApplicationError;
-import arch.hex.domain.functional.enums.CardsPackType;
-import arch.hex.domain.functional.model.CardsPack;
 import arch.hex.domain.functional.model.Player;
 import io.vavr.control.Either;
 
-public interface PlayerApi {
+public interface PlayerCreatorApi {
     Either<ApplicationError, Player> create(String pseudo);
 }
