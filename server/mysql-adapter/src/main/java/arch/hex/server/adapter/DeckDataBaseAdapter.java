@@ -5,10 +5,7 @@ import arch.hex.domain.functional.model.Deck;
 import arch.hex.domain.functional.model.Player;
 import arch.hex.domain.ports.server.model_persistence.DeckPersistenceSpi;
 import arch.hex.server.mapper.DeckEntityMapper;
-import arch.hex.server.mapper.HeroEntityMapper;
-import arch.hex.server.mapper.PlayerEntityMapper;
 import arch.hex.server.repository.DeckRepository;
-import io.vavr.collection.HashSet;
 import io.vavr.control.Either;
 import io.vavr.control.Option;
 import io.vavr.collection.Set;
@@ -35,10 +32,9 @@ public class DeckDataBaseAdapter implements DeckPersistenceSpi {
                 .map(arch.hex.server.mapper.DeckEntityMapper::toDomain);
     }
 
-    @Override
     @Transactional(readOnly = true)
-    public Option<Set<Deck>> findByPlayer(Player player) {
-            return Option.of(deckRepository.findByPlayer_IdPlayer(player.getIdPlayer())
-                    .map(DeckEntityMapper::toDomain));
+    public Option<Set<Deck>> findByIdPlayer(String idPlayer) {
+        return Option.of(deckRepository.findByPlayer_IdPlayer(idPlayer)
+                .map(DeckEntityMapper::toDomain));
     }
 }

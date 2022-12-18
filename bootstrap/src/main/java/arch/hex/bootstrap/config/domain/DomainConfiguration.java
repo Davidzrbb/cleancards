@@ -18,17 +18,16 @@ import arch.hex.domain.functional.service.player_services.PlayerUpdateTokenServi
 import arch.hex.domain.functional.service.validation.CardsPackOpeningValidator;
 import arch.hex.domain.ports.client.cardspack_api.CardsPackCreatorApi;
 import arch.hex.domain.ports.client.cardspack_api.CardsPackOpeningByIdPlayerAndIdCardsPackApi;
+import arch.hex.domain.ports.client.deck_api.DeckFinderApi;
 import arch.hex.domain.ports.client.player_api.PlayerCreatorApi;
 import arch.hex.domain.ports.client.hero_api.HeroCreatorApi;
 import arch.hex.domain.ports.client.hero_api.HeroFindAllApi;
 import arch.hex.domain.ports.server.model_persistence.CardsPackPersistenceSpi;
+import arch.hex.domain.ports.server.model_persistence.DeckPersistenceSpi;
 import arch.hex.domain.ports.server.model_persistence.HeroPersistenceSpi;
 import arch.hex.domain.ports.server.model_persistence.PlayerPersistenceSpi;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.*;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 
@@ -42,6 +41,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
         HeroFinderRarityService.class, DeckFinderService.class, HeroGetRandomByCardsPackOpeningService.class
         , PlayerUpdateTokenService.class})
 public class DomainConfiguration {
+
 
     @Bean
     public CardsPackCreatorApi cardsPackCreatorService(CardsPackPersistenceSpi spi, IdGenerationService idGenerationService) {
@@ -68,5 +68,11 @@ public class DomainConfiguration {
                                                                                                        CardsPackGetHeroesByDropRateService cardsPackGetHeroesByDropRateService, DeckUpdateCardsPackOpeningService deckUpdateCardsPackOpeningService,
                                                                                                        PlayerUpdateTokenService playerUpdateTokenService) {
         return new CardsPackOpeningByIdPlayerAndIdCardsPackService(cardsPackFinderService, playerFinderService, cardsPackOpeningValidator, cardsPackGetHeroesByDropRateService, deckUpdateCardsPackOpeningService, playerUpdateTokenService);
+    }
+
+    @Bean
+    @Primary
+    public DeckFinderApi deckFinderService(DeckPersistenceSpi deckPersistenceSpi) {
+        return new DeckFinderService(deckPersistenceSpi);
     }
 }

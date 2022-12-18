@@ -16,8 +16,8 @@ public class DeckFinderService implements DeckFinderApi {
     private final DeckPersistenceSpi deckPersistenceSpi;
 
     @Override
-    public Option<Set<Deck>> findByPlayer(Player player) {
-        return deckPersistenceSpi.findByPlayer(player);
+    public Option<Set<Deck>> findByIdPlayer(String idPlayer) {
+        return deckPersistenceSpi.findByIdPlayer(idPlayer);
     }
 }
 

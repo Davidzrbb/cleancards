@@ -26,7 +26,7 @@ public class DeckUpdateCardsPackOpeningService implements DeckUpdateCardsPackOpe
     private final HeroGetRandomByCardsPackOpeningService heroGetRandomByCardsPackOpening;
 
     public Either<ApplicationError, Deck> updateByOpeningCardsPack(Player player, ArrayList<Hero> heroesRandomList) {
-        Option<Set<Deck>> deck = deckFinderService.findByPlayer(player);
+        Option<Set<Deck>> deck = deckFinderService.findByIdPlayer(player.getIdPlayer());
         if (deck.get().isEmpty()) {
             return Either.left(new ApplicationError("No deck found for player", null, player, null));
         }

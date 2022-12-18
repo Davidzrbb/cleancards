@@ -6,5 +6,5 @@ import io.vavr.collection.Set;
 import io.vavr.control.Option;
 
 public interface DeckFinderApi {
-    Option<Set<Deck>> findByPlayer(Player player);
+    Option<Set<Deck>> findByIdPlayer(String player);
 }

@@ -10,5 +10,5 @@ import io.vavr.control.Option;
 public interface PersistenceDeckSpi<T> {
     Either<ApplicationError, T> save(T o);
 
-    Option<Set<Deck>> findByPlayer(Player player);
+    Option<Set<Deck>> findByIdPlayer(String player);
 }
