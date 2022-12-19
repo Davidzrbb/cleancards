@@ -32,9 +32,17 @@ public class DeckDataBaseAdapter implements DeckPersistenceSpi {
                 .map(arch.hex.server.mapper.DeckEntityMapper::toDomain);
     }
 
+    @Override
     @Transactional(readOnly = true)
     public Option<Set<Deck>> findByIdPlayer(String idPlayer) {
         return Option.of(deckRepository.findByPlayer_IdPlayer(idPlayer)
                 .map(DeckEntityMapper::toDomain));
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Option<Deck> findById(String idDeck) {
+        return deckRepository.findDeckEntityByIdDeck(idDeck)
+                .map(DeckEntityMapper::toDomain);
     }
 }

@@ -10,8 +10,8 @@ import java.util.UUID;
 @Builder
 public class Fight {
     @Default
-    UUID idFight = UUID.randomUUID();
+    String idFight = UUID.randomUUID().toString();
     Hero idHeroAlly;
     Hero idHeroEnemy;
-    boolean isWin;
+    boolean allyWin;
 }

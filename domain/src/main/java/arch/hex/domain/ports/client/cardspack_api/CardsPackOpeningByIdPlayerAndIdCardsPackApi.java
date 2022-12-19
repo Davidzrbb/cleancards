@@ -11,6 +11,5 @@ import java.util.ArrayList;
 
 public interface CardsPackOpeningByIdPlayerAndIdCardsPackApi {
     Either<ApplicationError, Set<Deck>> getDecksByCardsPackAndPlayer(String cardsPack, String player);
-
-    Either<ApplicationError, Set<Deck>> getDecksByRandomHeroesAndPlayerAndCardsNumber(ArrayList<Hero> randomHeroes, Player player, int cardsNumber);
+    
 }
