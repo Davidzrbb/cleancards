@@ -1,16 +1,19 @@
 package arch.hex.server.entity;
 
 import com.sun.istack.NotNull;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
-import java.util.UUID;
 
 @Entity
+@Getter
+@Setter
+@Builder
+@AllArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @NoArgsConstructor
 @Data
+@Table(name = "fight")
 public class FightEntity {
     @Id
     @EqualsAndHashCode.Include
@@ -19,14 +22,15 @@ public class FightEntity {
     @ManyToOne
     @JoinColumn(name = "idHeroAlly")
     @NotNull
-    HeroEntity idHeroAlly;
+    HeroEntity heroAlly;
 
     @ManyToOne
     @JoinColumn(name = "idHeroEnemy")
     @NotNull
-    HeroEntity idHeroEnemy;
+    HeroEntity heroEnemy;
 
     @NotNull
-    private boolean isWin;
+    private boolean allyWin;
+
 
 }

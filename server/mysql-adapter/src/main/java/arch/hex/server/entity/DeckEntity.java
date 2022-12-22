@@ -16,6 +16,7 @@ import java.util.UUID;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @NoArgsConstructor
 @Data
+@Table(name = "deck")
 public class DeckEntity {
     @Id
     @EqualsAndHashCode.Include

@@ -1,10 +1,15 @@
 package arch.hex.client.mapper;
 
 import arch.hex.client.dto.deck_dto.DeckDto;
-import arch.hex.client.dto.hero_dto.HeroDto;
+
+import arch.hex.domain.functional.enums.CardsPackType;
+import arch.hex.domain.functional.model.CardsPack;
 import arch.hex.domain.functional.model.Deck;
-import arch.hex.domain.functional.model.Hero;
-import io.vavr.collection.Set;
+import arch.hex.domain.functional.model.Fight;
+import arch.hex.domain.functional.model.Player;
+
+import java.util.List;
+
 
 public interface DeckDtoMapper {
 
@@ -16,8 +21,13 @@ public interface DeckDtoMapper {
         );
     }
 
-    static Set<DeckDto> toDto(Set<Deck> decks) {
-        return decks.map(DeckDtoMapper::toDto);
+    static Object toDto(List<Deck> decks) {
+        return decks.stream()
+                .map(DeckDtoMapper::toDto)
+                .toList();
     }
 
+    static Object toDto(String s) {
+        return s;
+    }
 }

@@ -11,7 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RequiredArgsConstructor
-public class HeroCreatorCreatorService implements HeroCreatorApi {
+public class HeroCreatorService implements HeroCreatorApi {
 
     private final HeroPersistenceSpi heroPersistenceSpi;
 
@@ -50,7 +50,7 @@ public class HeroCreatorCreatorService implements HeroCreatorApi {
             }
         }
         return heroPersistenceSpi.save(Hero.builder()
-                .idHero(idGenerationService.generateNewId().toString())
+                .idHero(idGenerationService.generateNewId())
                 .name(hero.getName())
                 .rarity(hero.getRarity())
                 .speciality(hero.getSpeciality())

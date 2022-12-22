@@ -21,6 +21,7 @@
         <module>client</module>
         <module>domain</module>
         <module>server</module>
+        <module>infrastructure</module>
     </modules>
 
     <properties>
