@@ -22,12 +22,12 @@ public class FightEntity {
     @ManyToOne
     @JoinColumn(name = "idHeroAlly")
     @NotNull
-    HeroEntity idHeroAlly;
+    HeroEntity heroAlly;
 
     @ManyToOne
     @JoinColumn(name = "idHeroEnemy")
     @NotNull
-    HeroEntity idHeroEnemy;
+    HeroEntity heroEnemy;
 
     @NotNull
     private boolean allyWin;

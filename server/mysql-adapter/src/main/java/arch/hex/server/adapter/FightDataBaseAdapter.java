@@ -14,6 +14,8 @@ import lombok.val;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 import static arch.hex.server.mapper.FightEntityMapper.fromDomain;
 import static io.vavr.API.Try;
 
@@ -34,8 +36,10 @@ public class FightDataBaseAdapter implements FightPersistenceSpi {
 
     @Override
     @Transactional(readOnly = true)
-    public Option<Set<Fight>> findByIdHero(String idHero) {
-        return Option.of(fightRepository.findFightEntityByIdHeroAllyOrIdHeroEnemy(idHero, idHero)
-                .map(FightEntityMapper::toDomain));
+    public Option<List<Fight>> findByIdHero(String idHero) {
+        return Option.of(fightRepository.findByHeroAlly_IdHeroOrHeroEnemy_IdHero(idHero, idHero)
+                .stream()
+                .map(FightEntityMapper::toDomain)
+                .toList());
     }
 }
