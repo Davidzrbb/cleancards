@@ -17,7 +17,7 @@ public class DeckCreatorService {
     private final IdGenerationService idGenerationService;
 
 
-    public Either<ApplicationError, Deck> save(Player player) {
+    public Either<ApplicationError, Deck> create(Player player) {
         return deckPersistenceSpi.save(Deck.builder()
                 .idDeck(idGenerationService.generateNewId().toString())
                 .player(player)

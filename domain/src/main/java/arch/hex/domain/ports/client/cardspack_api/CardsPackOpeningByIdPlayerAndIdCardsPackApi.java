@@ -8,8 +8,9 @@ import io.vavr.collection.Set;
 import io.vavr.control.Either;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface CardsPackOpeningByIdPlayerAndIdCardsPackApi {
-    Either<ApplicationError, Set<Deck>> getDecksByCardsPackAndPlayer(String cardsPack, String player);
+    Either<ApplicationError, List<Deck>> getDecksByCardsPackAndPlayer(String cardsPack, String player);
     
 }

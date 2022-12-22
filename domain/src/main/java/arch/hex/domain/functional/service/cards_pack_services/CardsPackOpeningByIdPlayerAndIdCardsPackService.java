@@ -19,6 +19,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -33,8 +34,7 @@ public class CardsPackOpeningByIdPlayerAndIdCardsPackService implements CardsPac
 
     //CE SERVICE RETOURNE LES CARTES OBTENUES PAR LE JOUEUR
     @Override
-    public Either<ApplicationError, Set<Deck>> getDecksByCardsPackAndPlayer(String idCardsPack, String idPlayer) {
-        System.out.println(idCardsPack);
+    public Either<ApplicationError, List<Deck>> getDecksByCardsPackAndPlayer(String idCardsPack, String idPlayer) {
         Option<CardsPack> cardsPack = cardsPackFinderService.findById(idCardsPack);
         Option<Player> player = playerFinderService.findById(idPlayer);
         Validation<ApplicationError, Boolean> validation = cardsPackOpeningValidator.validate(cardsPack, player);
@@ -42,22 +42,21 @@ public class CardsPackOpeningByIdPlayerAndIdCardsPackService implements CardsPac
             return Either.left(validation.getError());
         }
         ArrayList<Hero> randomHeroes = cardsPackGetHeroesByDropRateService.getHeroesByDropRate(cardsPack.get());
-        Either<ApplicationError, Set<Deck>> decks = getDecksByRandomHeroesAndPlayerAndCardsNumber(randomHeroes, player.get(), cardsPack.get().getCardsNumber());
+        Either<ApplicationError, List<Deck>> decks = createDecksByRandomHeroesAndPlayerAndCardsNumber(randomHeroes, player.get(), cardsPack.get().getCardsNumber());
         if (decks.isRight()) {
             playerUpdateTokenService.updateToken(player.get(), player.get().getTokens() - cardsPack.get().getRequiredTokens());
         }
         return decks;
     }
 
-    public Either<ApplicationError, Set<Deck>> getDecksByRandomHeroesAndPlayerAndCardsNumber(ArrayList<Hero> randomHeroes, Player player, int cardsNumber) {
-        Set<Deck> playerDecks = HashSet.empty();
-        //about the cards pack type, we add a number of cards into the player deck
+    public Either<ApplicationError, List<Deck>> createDecksByRandomHeroesAndPlayerAndCardsNumber(ArrayList<Hero> randomHeroes, Player player, int cardsNumber) {
+        List<Deck> playerDecks = new ArrayList<>();
         for (int i = 0; i < cardsNumber; i++) {
             Either<ApplicationError, Deck> deck = deckUpdateCardsPackOpeningService.updateByOpeningCardsPack(player, randomHeroes);
             if (deck.isLeft()) {
                 return Either.left(deck.getLeft());
             }
-            playerDecks = playerDecks.add(deck.get());
+            playerDecks.add(deck.get());
         }
         return Either.right(playerDecks);
     }

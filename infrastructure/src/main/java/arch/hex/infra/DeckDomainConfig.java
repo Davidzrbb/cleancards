@@ -2,6 +2,7 @@ package arch.hex.infra;
 
 import arch.hex.domain.functional.service.IdGenerationService;
 import arch.hex.domain.functional.service.deck_services.*;
+import arch.hex.domain.functional.service.fight_services.FightCreatorService;
 import arch.hex.domain.functional.service.hero_services.HeroGetRandomByCardsPackOpeningService;
 import arch.hex.domain.functional.service.hero_services.HeroUpdateExperienceService;
 import arch.hex.domain.functional.service.hero_services.HeroUpdateHpService;
@@ -29,8 +30,8 @@ public class DeckDomainConfig {
     public DeckFightApi deckFightService(FightValidator fightValidator,
                                          HeroUpdateHpService heroUpdateHpService,
                                          HeroUpdateExperienceService heroUpdateExperienceService,
-                                         PlayerUpdateWinnerService playerUpdateWinnerService) {
-        return new DeckFightService(fightValidator, heroUpdateHpService, heroUpdateExperienceService, playerUpdateWinnerService);
+                                         PlayerUpdateWinnerService playerUpdateWinnerService, FightCreatorService fightCreatorService) {
+        return new DeckFightService(fightValidator, heroUpdateHpService, heroUpdateExperienceService, playerUpdateWinnerService,fightCreatorService);
     }
     @Bean
     public DeckUpdateCardsPackOpeningService deckUpdateCardsPackOpeningService(DeckFinderByPlayerService deckFinderByPlayerService, DeckPersistenceSpi deckPersistenceSpi, HeroGetRandomByCardsPackOpeningService heroGetRandomByCardsPackOpeningService) {

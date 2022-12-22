@@ -16,7 +16,7 @@ public class FightCreatorService {
     private final FightPersistenceSpi fightPersistenceSpi;
     private final IdGenerationService idGenerationService;
 
-    public Either<ApplicationError, Fight> save(Fight fight) {
+    public Either<ApplicationError, Fight> create(Fight fight) {
         return fightPersistenceSpi.save(Fight.builder()
                 .idFight(idGenerationService.generateNewId())
                 .idHeroEnemy(fight.getIdHeroEnemy())

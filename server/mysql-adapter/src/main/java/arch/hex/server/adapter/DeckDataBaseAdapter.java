@@ -2,17 +2,17 @@ package arch.hex.server.adapter;
 
 import arch.hex.domain.ApplicationError;
 import arch.hex.domain.functional.model.Deck;
-import arch.hex.domain.functional.model.Player;
 import arch.hex.domain.ports.server.model_persistence.DeckPersistenceSpi;
 import arch.hex.server.mapper.DeckEntityMapper;
 import arch.hex.server.repository.DeckRepository;
 import io.vavr.control.Either;
 import io.vavr.control.Option;
-import io.vavr.collection.Set;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 import static arch.hex.server.mapper.DeckEntityMapper.fromDomain;
 import static io.vavr.API.Try;
@@ -34,9 +34,11 @@ public class DeckDataBaseAdapter implements DeckPersistenceSpi {
 
     @Override
     @Transactional(readOnly = true)
-    public Option<Set<Deck>> findByIdPlayer(String idPlayer) {
+    public Option<List<Deck>> findByIdPlayer(String idPlayer) {
         return Option.of(deckRepository.findByPlayer_IdPlayer(idPlayer)
-                .map(DeckEntityMapper::toDomain));
+                .stream()
+                .map(DeckEntityMapper::toDomain)
+                .toList());
     }
 
     @Override

@@ -6,12 +6,11 @@ import arch.hex.domain.functional.model.Hero;
 import arch.hex.domain.functional.model.Player;
 import arch.hex.domain.functional.service.hero_services.HeroGetRandomByCardsPackOpeningService;
 import arch.hex.domain.ports.server.model_persistence.DeckPersistenceSpi;
-import io.vavr.collection.Set;
 import io.vavr.control.Either;
 import io.vavr.control.Option;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-
+import java.util.List;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -25,11 +24,11 @@ public class DeckUpdateCardsPackOpeningService  {
     private final HeroGetRandomByCardsPackOpeningService heroGetRandomByCardsPackOpening;
 
     public Either<ApplicationError, Deck> updateByOpeningCardsPack(Player player, ArrayList<Hero> heroesRandomList) {
-        Option<Set<Deck>> deck = deckFinderByPlayerService.findByIdPlayer(player.getIdPlayer());
+        Option<List<Deck>> deck = deckFinderByPlayerService.findByIdPlayer(player.getIdPlayer());
         if (deck.get().isEmpty()) {
             return Either.left(new ApplicationError("No deck found for player", null, player, null));
         }
-        Deck deckToSetHero = deck.get().get();
+        Deck deckToSetHero = deck.get().get(0);
         if (deckToSetHero.getHero() != null) {
             Deck newDeck = Deck.builder()
                     .idDeck(UUID.randomUUID().toString())

@@ -27,7 +27,7 @@ public class PlayerCreatorService implements PlayerCreatorApi {
                         .tokens(4)
                         .build());
         if (player.isRight()) {
-            deckCreatorService.save(player.get());
+            deckCreatorService.create(player.get());
         }
         return player;
     }
