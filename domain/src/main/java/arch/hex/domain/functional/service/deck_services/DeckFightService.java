@@ -73,8 +73,8 @@ public class DeckFightService implements DeckFightApi {
 
     public Either<ApplicationError, Fight> saveHistoryFight(Hero heroAlly, Hero heroEnemy, Hero heroWinner) {
         return fightCreatorService.create(Fight.builder()
-                .idHeroAlly(heroAlly)
-                .idHeroEnemy(heroEnemy)
+                .heroAlly(heroAlly)
+                .heroEnemy(heroEnemy)
                 .allyWin(heroWinner.getIdHero().equals(heroAlly.getIdHero()))
                 .build());
     }

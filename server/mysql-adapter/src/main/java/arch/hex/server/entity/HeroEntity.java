@@ -6,7 +6,6 @@ import arch.hex.domain.functional.enums.Rarity;
 import arch.hex.domain.functional.enums.Speciality;
 
 import javax.persistence.*;
-import java.util.UUID;
 
 @Entity
 @Getter
