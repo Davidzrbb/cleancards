@@ -19,8 +19,8 @@ public class FightCreatorService {
     public Either<ApplicationError, Fight> create(Fight fight) {
         return fightPersistenceSpi.save(Fight.builder()
                 .idFight(idGenerationService.generateNewId())
-                .idHeroEnemy(fight.getIdHeroEnemy())
-                .idHeroAlly(fight.getIdHeroAlly())
+                .heroEnemy(fight.getHeroEnemy())
+                .heroAlly(fight.getHeroAlly())
                 .allyWin(fight.isAllyWin())
                 .build());
     }

@@ -7,8 +7,8 @@ public interface FightEntityMapper {
     static Fight toDomain(FightEntity entity) {
         return Fight.builder()
                 .idFight(entity.getIdFight())
-                .idHeroAlly(HeroEntityMapper.toDomain(entity.getHeroAlly()))
-                .idHeroEnemy(HeroEntityMapper.toDomain(entity.getHeroEnemy()))
+                .heroAlly(HeroEntityMapper.toDomain(entity.getHeroAlly()))
+                .heroEnemy(HeroEntityMapper.toDomain(entity.getHeroEnemy()))
                 .allyWin(entity.isAllyWin())
                 .build();
     }
@@ -16,8 +16,8 @@ public interface FightEntityMapper {
     static FightEntity fromDomain(Fight domain) {
         return FightEntity.builder()
                 .idFight(domain.getIdFight())
-                .heroAlly(HeroEntityMapper.fromDomain(domain.getIdHeroAlly()))
-                .heroEnemy(HeroEntityMapper.fromDomain(domain.getIdHeroEnemy()))
+                .heroAlly(HeroEntityMapper.fromDomain(domain.getHeroAlly()))
+                .heroEnemy(HeroEntityMapper.fromDomain(domain.getHeroEnemy()))
                 .allyWin(domain.isAllyWin())
                 .build();
     }

@@ -30,7 +30,7 @@ public class HeroDataBaseAdapter implements HeroPersistenceSpi {
         val entity = fromDomain(hero);
         return Try(() -> heroRepository.save(entity))
                 .toEither()
-                .mapLeft(throwable -> new ApplicationError("Unable to save cards pack", null, hero, throwable))
+                .mapLeft(throwable -> new ApplicationError("Unable to save hero", null, hero, throwable))
                 .map(HeroEntityMapper::toDomain);
     }
 

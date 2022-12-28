@@ -11,7 +11,7 @@ import java.util.UUID;
 public class Fight {
     @Default
     String idFight = UUID.randomUUID().toString();
-    Hero idHeroAlly;
-    Hero idHeroEnemy;
+    Hero heroAlly;
+    Hero heroEnemy;
     boolean allyWin;
 }
