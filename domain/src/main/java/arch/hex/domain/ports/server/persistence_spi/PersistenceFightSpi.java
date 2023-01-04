@@ -9,5 +9,5 @@ import java.util.List;
 public interface PersistenceFightSpi<T, ID> {
     Either<ApplicationError, T> save(T o);
 
-    Option<List<T>> findByIdHero(ID id);
+    List<T> findByIdHero(ID id);
 }

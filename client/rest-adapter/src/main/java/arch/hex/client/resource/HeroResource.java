@@ -1,6 +1,7 @@
 package arch.hex.client.resource;
 
 import arch.hex.client.dto.hero_dto.HeroCreationDto;
+import arch.hex.client.mapper.FightDtoMapper;
 import arch.hex.client.mapper.HeroDtoMapper;
 import arch.hex.domain.ports.client.hero_api.HeroCreatorApi;
 import arch.hex.domain.ports.client.hero_api.HeroFindAllApi;
@@ -26,9 +27,6 @@ public class HeroResource {
     }
     @GetMapping
     public ResponseEntity<Object> findAll() {
-        return heroFinderApi
-                .findAll()
-                .map(HeroDtoMapper::toDto)
-                .fold(ResponseEntity.noContent()::build, ResponseEntity::ok);
+        return ResponseEntity.ok(HeroDtoMapper.toDto(heroFinderApi.findAll()));
     }
 }

@@ -82,8 +82,7 @@ public class HeroDataBaseAdapterTest {
             when(heroRepository.findAll()).thenReturn(List.of(entity));
             val actual = heroDataBaseAdapter.findAll();
 
-            VavrAssertions.assertThat(actual).isDefined();
-            assertThat(actual.get().get(0)).usingRecursiveComparison().isEqualTo(hero);
+            assertThat(actual.get(0)).usingRecursiveComparison().isEqualTo(hero);
 
             verifyNoMoreInteractions(heroRepository);
         }
@@ -92,8 +91,8 @@ public class HeroDataBaseAdapterTest {
         void should_not_find_all() {
             when(heroRepository.findAll()).thenReturn(List.of());
             val actual = heroDataBaseAdapter.findAll();
-            VavrAssertions.assertThat(actual).isDefined();
-            assertThat(actual.get()).isEmpty();
+
+            assertThat(actual).isEmpty();
             verifyNoMoreInteractions(heroRepository);
         }
     }

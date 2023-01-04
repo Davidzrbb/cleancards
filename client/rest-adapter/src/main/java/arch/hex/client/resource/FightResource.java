@@ -17,9 +17,6 @@ public class FightResource {
 
     @GetMapping("/hero/{idHero}")
     public ResponseEntity<Object> findByIdPlayer(@PathVariable String idHero) {
-        return fightFinderByHero
-                .findByIdHero(idHero)
-                .map(FightDtoMapper::toDto)
-                .fold(ResponseEntity.badRequest()::build, ResponseEntity::ok);
+        return ResponseEntity.ok(FightDtoMapper.toDto(fightFinderByHero.findByIdHero(idHero)));
     }
 }

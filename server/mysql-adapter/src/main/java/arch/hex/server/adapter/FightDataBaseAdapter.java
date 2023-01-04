@@ -36,10 +36,10 @@ public class FightDataBaseAdapter implements FightPersistenceSpi {
 
     @Override
     @Transactional(readOnly = true)
-    public Option<List<Fight>> findByIdHero(String idHero) {
-        return Option.of(fightRepository.findByHeroAlly_IdHeroOrHeroEnemy_IdHero(idHero, idHero)
+    public List<Fight> findByIdHero(String idHero) {
+        return fightRepository.findByHeroAlly_IdHeroOrHeroEnemy_IdHero(idHero, idHero)
                 .stream()
                 .map(FightEntityMapper::toDomain)
-                .toList());
+                .toList();
     }
 }

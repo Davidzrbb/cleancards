@@ -119,8 +119,7 @@ public class DeckDataBaseAdapterTest {
             when(deckRepository.findByPlayer_IdPlayer(player.getIdPlayer())).thenReturn(List.of(entity));
             val actual = deckDataBaseAdapter.findByIdPlayer(player.getIdPlayer());
 
-            VavrAssertions.assertThat(actual).isDefined();
-            assertThat(actual.get().get(0)).usingRecursiveComparison().isEqualTo(domain);
+            assertThat(actual.get(0)).usingRecursiveComparison().isEqualTo(domain);
 
             verifyNoMoreInteractions(deckRepository);
 
@@ -131,8 +130,7 @@ public class DeckDataBaseAdapterTest {
             val id = UUID.randomUUID().toString();
             when(deckRepository.findByPlayer_IdPlayer(id)).thenReturn(List.of());
             val actual = deckDataBaseAdapter.findByIdPlayer(id);
-            VavrAssertions.assertThat(actual).isDefined();
-            assertThat(actual.get()).isEmpty();
+            assertThat(actual).isEmpty();
             verifyNoMoreInteractions(deckRepository);
         }
     }
