@@ -10,7 +10,7 @@ import java.util.List;
 public interface PersistenceDeckSpi<T> {
     Either<ApplicationError, T> save(T o);
 
-    Option<List<Deck>> findByIdPlayer(String player);
+    List<Deck> findByIdPlayer(String player);
 
     Option<Deck> findById(String idDeck);
 }

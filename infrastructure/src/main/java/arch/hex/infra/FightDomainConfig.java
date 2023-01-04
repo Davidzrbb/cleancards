@@ -8,7 +8,9 @@ import arch.hex.domain.functional.service.validation.FightValidator;
 import arch.hex.domain.ports.client.fight_api.FightFinderByHeroApi;
 import arch.hex.domain.ports.server.model_persistence.FightPersistenceSpi;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
+@Configuration
 public class FightDomainConfig {
 
     @Bean

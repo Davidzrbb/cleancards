@@ -34,11 +34,11 @@ public class DeckDataBaseAdapter implements DeckPersistenceSpi {
 
     @Override
     @Transactional(readOnly = true)
-    public Option<List<Deck>> findByIdPlayer(String idPlayer) {
-        return Option.of(deckRepository.findByPlayer_IdPlayer(idPlayer)
+    public List<Deck> findByIdPlayer(String idPlayer) {
+        return deckRepository.findByPlayer_IdPlayer(idPlayer)
                 .stream()
                 .map(DeckEntityMapper::toDomain)
-                .toList());
+                .toList();
     }
 
     @Override

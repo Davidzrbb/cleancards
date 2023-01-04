@@ -6,8 +6,6 @@ import arch.hex.domain.functional.model.Hero;
 import arch.hex.domain.ports.server.model_persistence.HeroPersistenceSpi;
 import arch.hex.server.mapper.HeroEntityMapper;
 import arch.hex.server.repository.HeroRepository;
-import io.vavr.collection.HashSet;
-import io.vavr.collection.Set;
 import io.vavr.control.Either;
 import io.vavr.control.Option;
 import lombok.RequiredArgsConstructor;
@@ -36,11 +34,11 @@ public class HeroDataBaseAdapter implements HeroPersistenceSpi {
 
     @Override
     @Transactional(readOnly = true)
-    public Option<List<Hero>> findAll() {
-        return Option.of(heroRepository.findAll()
+    public List<Hero> findAll() {
+        return heroRepository.findAll()
                 .stream()
                 .map(HeroEntityMapper::toDomain)
-                .toList());
+                .toList();
     }
 
     @Override

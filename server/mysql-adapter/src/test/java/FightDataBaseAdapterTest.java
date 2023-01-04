@@ -94,8 +94,7 @@ public class FightDataBaseAdapterTest {
             when(fightRepository.findByHeroAlly_IdHeroOrHeroEnemy_IdHero(heroAlly.getIdHero(),heroAlly.getIdHero())).thenReturn(List.of(entity));
             val actual = fightDataBaseAdapter.findByIdHero(heroAlly.getIdHero());
 
-            VavrAssertions.assertThat(actual).isDefined();
-            assertThat(actual.get().get(0)).usingRecursiveComparison().isEqualTo(fight);
+            assertThat(actual.get(0)).usingRecursiveComparison().isEqualTo(fight);
 
             verifyNoMoreInteractions(fightRepository);
 
@@ -106,8 +105,7 @@ public class FightDataBaseAdapterTest {
             val id = UUID.randomUUID().toString();
             when(fightRepository.findByHeroAlly_IdHeroOrHeroEnemy_IdHero(id,id)).thenReturn(List.of());
             val actual = fightDataBaseAdapter.findByIdHero(id);
-            VavrAssertions.assertThat(actual).isDefined();
-            assertThat(actual.get()).isEmpty();
+            assertThat(actual).isEmpty();
             verifyNoMoreInteractions(fightRepository);
         }
     }

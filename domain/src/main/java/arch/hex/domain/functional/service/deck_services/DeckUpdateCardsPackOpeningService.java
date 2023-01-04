@@ -24,11 +24,11 @@ public class DeckUpdateCardsPackOpeningService  {
     private final HeroGetRandomByCardsPackOpeningService heroGetRandomByCardsPackOpening;
 
     public Either<ApplicationError, Deck> updateByOpeningCardsPack(Player player, ArrayList<Hero> heroesRandomList) {
-        Option<List<Deck>> deck = deckFinderByPlayerService.findByIdPlayer(player.getIdPlayer());
-        if (deck.get().isEmpty()) {
+        List<Deck> deck = deckFinderByPlayerService.findByIdPlayer(player.getIdPlayer());
+        if (deck.isEmpty()) {
             return Either.left(new ApplicationError("No deck found for player", null, player, null));
         }
-        Deck deckToSetHero = deck.get().get(0);
+        Deck deckToSetHero = deck.get(0);
         if (deckToSetHero.getHero() != null) {
             Deck newDeck = Deck.builder()
                     .idDeck(UUID.randomUUID().toString())

@@ -19,10 +19,7 @@ public class DeckResource {
 
     @GetMapping("/player/{idPlayer}")
     public ResponseEntity<Object> findByIdPlayer(@PathVariable String idPlayer) {
-        return deckFinderApi
-                .findByIdPlayer(idPlayer)
-                .map(DeckDtoMapper::toDto)
-                .fold(ResponseEntity.badRequest()::build, ResponseEntity::ok);
+        return ResponseEntity.ok(DeckDtoMapper.toDto(deckFinderApi.findByIdPlayer(idPlayer)));
     }
 
     @GetMapping("/fight/{idDeckAlly}/{idDeckEnemy}")
