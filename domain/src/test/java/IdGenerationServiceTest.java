@@ -1,31 +1,27 @@
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.mockito.Mockito.when;
+import arch.hex.domain.functional.service.IdGenerationService;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.UUID;
 
-import arch.hex.domain.functional.service.IdGenerationService;
-import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
-import org.junit.jupiter.api.extension.ExtendWith;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class IdGenerationServiceTest {
-
-    @Mock
-    private IdGenerationService.UUIDGenerator uuidGenerator;
-
-    @InjectMocks IdGenerationService idGenerationService;
+    @InjectMocks
+    private IdGenerationService service;
 
     @Test
-    void should_generate_new_id() {
-        UUID expectedUUID = UUID.randomUUID();
+    void generateNewId_should_return_a_valid_uuid() {
+        String result = service.generateNewId();
 
-        when(uuidGenerator.generateUUID()).thenReturn(expectedUUID);
+        UUID.fromString(result);
 
-        String result = idGenerationService.generateNewId();
-
-        assertThat(result).isEqualTo(expectedUUID.toString());
+        assertEquals(36, result.length());
     }
 }

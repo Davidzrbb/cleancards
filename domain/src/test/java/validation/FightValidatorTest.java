@@ -6,14 +6,17 @@ import arch.hex.domain.functional.model.Hero;
 import arch.hex.domain.functional.model.Player;
 import arch.hex.domain.functional.service.deck_services.DeckFinderByIdService;
 import arch.hex.domain.functional.service.validation.FightValidator;
+import io.vavr.control.Option;
 import io.vavr.control.Validation;
 import lombok.RequiredArgsConstructor;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,42 +24,21 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
-
-@RequiredArgsConstructor
+@ExtendWith(MockitoExtension.class)
 class FightValidatorTest {
 
-   /* @Mock
+    @Mock
     private DeckFinderByIdService deckFinderByIdService;
 
     @InjectMocks
     private FightValidator fightValidator;
-
-    private String idAlly = "1";
-    private String idEnemy = "2";
-    private Deck deckAlly;
-    private Deck deckEnemy;
-    private Hero heroAlly;
-    private Hero heroEnemy;
-    private Player playerAlly;
-    private Player playerEnemy;
-
-    @BeforeEach
-    public void setUp() {
-        MockitoAnnotations.openMocks(this);
-
-        heroAlly = new Hero("Hero Ally", 1);
-        heroEnemy = new Hero("Hero Enemy", 2);
-        playerAlly = new Player("Player Ally");
-        playerEnemy = new Player("Player Enemy");
-
-        deckAlly = new Deck("Deck Ally", heroAlly, playerAlly);
-        deckEnemy = new Deck("Deck Enemy", heroEnemy, playerEnemy);
-    }
+    String idAlly = "idAlly";
+    String idEnemy = "idEnemy";
 
     @Test
     public void shouldReturnInvalidWhenDeckNotFound() {
-        when(deckFinderByIdService.findById(idAlly)).thenReturn(Optional.empty());
-        when(deckFinderByIdService.findById(idEnemy)).thenReturn(Optional.empty());
+        when(deckFinderByIdService.findById(idAlly)).thenReturn(Option.none());
+        when(deckFinderByIdService.findById(idEnemy)).thenReturn(Option.none());
 
         Validation<ApplicationError, List<Deck>> result = fightValidator.validateFight(idAlly, idEnemy);
 
@@ -66,11 +48,10 @@ class FightValidatorTest {
 
     @Test
     public void shouldReturnInvalidWhenHeroNotFound() {
-        when(deckFinderByIdService.findById(idAlly)).thenReturn(Optional.ofNullable(deckAlly));
-        when(deckFinderByIdService.findById(idEnemy)).thenReturn(Optional.ofNullable(deckEnemy));
-
-        deckAlly.setHero(null);
-        deckEnemy.setHero(null);
+        Deck deckAlly = Deck.builder().idDeck(idAlly).hero(null).build();
+        Deck deckEnemy = Deck.builder().idDeck(idEnemy).hero(null).build();
+        when(deckFinderByIdService.findById(idAlly)).thenReturn(Option.of(deckAlly));
+        when(deckFinderByIdService.findById(idEnemy)).thenReturn(Option.of(deckEnemy));
 
         Validation<ApplicationError, List<Deck>> result = fightValidator.validateFight(idAlly, idEnemy);
 
@@ -80,11 +61,12 @@ class FightValidatorTest {
 
     @Test
     public void shouldReturnInvalidWhenHeroLevelIsTooHigh() {
-        when(deckFinderByIdService.findById(idAlly)).thenReturn(Optional.ofNullable(deckAlly));
-        when(deckFinderByIdService.findById(idEnemy)).thenReturn(Optional.ofNullable(deckEnemy));
-
-        heroAlly.setLevel(3);
-        heroEnemy.setLevel(2);
+        Hero heroAlly = Hero.builder().level(3).build();
+        Hero heroEnemy = Hero.builder().level(2).build();
+        Deck deckAlly = Deck.builder().idDeck(idAlly).hero(heroAlly).build();
+        Deck deckEnemy = Deck.builder().idDeck(idEnemy).hero(heroEnemy).build();
+        when(deckFinderByIdService.findById(idAlly)).thenReturn(Option.of(deckAlly));
+        when(deckFinderByIdService.findById(idEnemy)).thenReturn(Option.of(deckEnemy));
 
         Validation<ApplicationError, List<Deck>> result = fightValidator.validateFight(idAlly, idEnemy);
 
@@ -94,15 +76,14 @@ class FightValidatorTest {
 
     @Test
     public void shouldReturnInvalidWhenPlayerNotFound() {
-        when(deckFinderByIdService.findById(idAlly)).thenReturn(Optional.ofNullable(deckAlly));
-        when(deckFinderByIdService.findById(idEnemy)).thenReturn(Optional.ofNullable(deckEnemy));
-
-        deckAlly.setPlayer(null);
-        deckEnemy.setPlayer(null);
+        Deck deckAlly = Deck.builder().idDeck(idAlly).player(null).build();
+        Deck deckEnemy = Deck.builder().idDeck(idEnemy).player(null).build();
+        when(deckFinderByIdService.findById(idAlly)).thenReturn(Option.of(deckAlly));
+        when(deckFinderByIdService.findById(idEnemy)).thenReturn(Option.of(deckEnemy));
 
         Validation<ApplicationError, List<Deck>> result = fightValidator.validateFight(idAlly, idEnemy);
 
         assertEquals(result.isInvalid(), true);
         assertEquals(result.getError().context(), "Player not found");
-    }*/
+    }
 }
