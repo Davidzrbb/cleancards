@@ -22,7 +22,7 @@ public class PlayerCreatorService implements PlayerCreatorApi {
     public Either<ApplicationError, Player> create(String pseudo) {
         Either<ApplicationError, Player> player = playerPersistenceSpi.save(
                 Player.builder()
-                        .idPlayer(idGenerationService.generateNewId().toString())
+                        .idPlayer(idGenerationService.generateNewId())
                         .pseudo(pseudo)
                         .tokens(4)
                         .build());

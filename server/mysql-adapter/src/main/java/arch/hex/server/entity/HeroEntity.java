@@ -15,7 +15,7 @@ import javax.persistence.*;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @NoArgsConstructor
 @Data
-@Table(name = "hero")
+@Table(name = "hero_entity")
 public class HeroEntity {
     @Id
     @EqualsAndHashCode.Include
@@ -30,12 +30,10 @@ public class HeroEntity {
     private Integer power;
     @NotNull
     private Integer armor;
-    @Enumerated(EnumType.STRING)
     @NotNull
-    private Speciality speciality;
-    @Enumerated(EnumType.STRING)
+    private String speciality;
     @NotNull
-    private Rarity rarity;
+    private String rarity;
     @NotNull
     private Integer level;
 }

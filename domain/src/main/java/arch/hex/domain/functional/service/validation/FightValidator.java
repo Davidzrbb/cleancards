@@ -5,8 +5,6 @@ import arch.hex.domain.functional.model.Deck;
 import arch.hex.domain.functional.model.Hero;
 import arch.hex.domain.functional.model.Player;
 import arch.hex.domain.functional.service.deck_services.DeckFinderByIdService;
-import arch.hex.domain.functional.service.deck_services.DeckFinderByPlayerService;
-import io.vavr.control.Either;
 import io.vavr.control.Validation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

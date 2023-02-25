@@ -10,8 +10,6 @@ import arch.hex.domain.functional.service.player_services.PlayerFinderService;
 import arch.hex.domain.functional.service.player_services.PlayerUpdateTokenService;
 import arch.hex.domain.functional.service.validation.CardsPackOpeningValidator;
 import arch.hex.domain.ports.client.cardspack_api.CardsPackOpeningByIdPlayerAndIdCardsPackApi;
-import io.vavr.collection.HashSet;
-import io.vavr.collection.Set;
 import io.vavr.control.Either;
 import io.vavr.control.Option;
 import io.vavr.control.Validation;

@@ -44,6 +44,6 @@ public class HeroDataBaseAdapter implements HeroPersistenceSpi {
     @Override
     @Transactional(readOnly = true)
     public Option<Hero> findByRarity(Rarity rarity) {
-        return heroRepository.findHeroEntityByRarity(rarity).map(HeroEntityMapper::toDomain);
+        return heroRepository.findHeroEntityByRarity(String.valueOf(rarity)).map(HeroEntityMapper::toDomain);
     }
 }

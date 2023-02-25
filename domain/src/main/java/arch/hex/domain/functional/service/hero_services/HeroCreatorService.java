@@ -1,6 +1,7 @@
 package arch.hex.domain.functional.service.hero_services;
 
 import arch.hex.domain.ApplicationError;
+import arch.hex.domain.functional.enums.Rarity;
 import arch.hex.domain.functional.model.Hero;
 import arch.hex.domain.functional.service.IdGenerationService;
 import arch.hex.domain.ports.client.hero_api.HeroCreatorApi;
@@ -19,35 +20,35 @@ public class HeroCreatorService implements HeroCreatorApi {
 
     @Override
     public Either<ApplicationError, Hero> create(Hero hero) {
-        int hp = 0, power = 0, armor = 0;
+        int hp = 0;
+        int power = 0;
+        int armor = 0;
         switch (hero.getSpeciality()) {
-            case Tank -> {
+            case TANK -> {
                 hp = 1000;
                 power = 100;
                 armor = 20;
             }
-            case Assassin -> {
+            case ASSASSIN -> {
                 hp = 800;
                 power = 200;
                 armor = 5;
             }
-            case Mage -> {
+            case MAGE -> {
                 hp = 700;
                 power = 150;
                 armor = 10;
             }
         }
-        switch (hero.getRarity()) {
-            case Rare -> {
-                hp += (hp * 10) / 100;
-                power += (power * 10) / 100;
-                armor += (armor * 10) / 100;
-            }
-            case Legendary -> {
-                hp += (hp * 20) / 100;
-                power += (power * 20) / 100;
-                armor += (armor * 20) / 100;
-            }
+        if (hero.getRarity() == Rarity.RARE) {
+            hp += (hp * 10) / 100;
+            power += (power * 10) / 100;
+            armor += (armor * 10) / 100;
+        }
+        if (hero.getRarity() == Rarity.LEGENDARY){
+            hp += (hp * 20) / 100;
+            power += (power * 20) / 100;
+            armor += (armor * 20) / 100;
         }
         return heroPersistenceSpi.save(Hero.builder()
                 .idHero(idGenerationService.generateNewId())

@@ -4,8 +4,6 @@ import arch.hex.client.dto.hero_dto.HeroDto;
 import arch.hex.domain.functional.enums.Rarity;
 import arch.hex.domain.functional.enums.Speciality;
 import arch.hex.domain.functional.model.Hero;
-import io.vavr.collection.Set;
-
 import java.util.List;
 
 public interface HeroDtoMapper {

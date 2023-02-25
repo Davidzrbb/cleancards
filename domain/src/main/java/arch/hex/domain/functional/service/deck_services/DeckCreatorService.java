@@ -19,7 +19,7 @@ public class DeckCreatorService {
 
     public Either<ApplicationError, Deck> create(Player player) {
         return deckPersistenceSpi.save(Deck.builder()
-                .idDeck(idGenerationService.generateNewId().toString())
+                .idDeck(idGenerationService.generateNewId())
                 .player(player)
                 .build());
     }

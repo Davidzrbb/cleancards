@@ -1,12 +1,8 @@
 package arch.hex.server.entity;
 
-import arch.hex.domain.functional.model.Hero;
-import arch.hex.domain.functional.model.Player;
 import com.sun.istack.NotNull;
 import lombok.*;
-
 import javax.persistence.*;
-import java.util.UUID;
 
 @Entity
 @Getter
@@ -16,7 +12,7 @@ import java.util.UUID;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @NoArgsConstructor
 @Data
-@Table(name = "deck")
+@Table(name = "deck_entity")
 public class DeckEntity {
     @Id
     @EqualsAndHashCode.Include

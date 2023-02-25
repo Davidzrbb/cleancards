@@ -104,9 +104,8 @@ public class HeroDataBaseAdapterTest {
             val hero = Hero.builder().build();
             val entity = HeroEntityMapper.fromDomain(hero);
 
-
-            when(heroRepository.findHeroEntityByRarity(any(Rarity.class))).thenReturn(Some(entity));
-            val actual = heroDataBaseAdapter.findByRarity(Rarity.Common);
+            when(heroRepository.findHeroEntityByRarity(anyString())).thenReturn(Some(entity));
+            val actual = heroDataBaseAdapter.findByRarity(Rarity.valueOf("COMMON"));
             VavrAssertions.assertThat(actual).isDefined();
             assertThat(actual.get()).usingRecursiveComparison().isEqualTo(hero);
 
@@ -115,8 +114,8 @@ public class HeroDataBaseAdapterTest {
 
         @Test
         void should_not_find_by_rarity() {
-            when(heroRepository.findHeroEntityByRarity(any(Rarity.class))).thenReturn(None());
-            val actual = heroDataBaseAdapter.findByRarity(Rarity.Common);
+            when(heroRepository.findHeroEntityByRarity(anyString())).thenReturn(None());
+            val actual = heroDataBaseAdapter.findByRarity(Rarity.valueOf("COMMON"));
             VavrAssertions.assertThat(actual).isEmpty();
             verifyNoMoreInteractions(heroRepository);
         }

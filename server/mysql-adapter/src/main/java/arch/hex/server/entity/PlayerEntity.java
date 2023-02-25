@@ -2,9 +2,7 @@ package arch.hex.server.entity;
 
 import com.sun.istack.NotNull;
 import lombok.*;
-
 import javax.persistence.*;
-import java.util.UUID;
 
 @Entity
 @Getter
@@ -14,7 +12,7 @@ import java.util.UUID;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @NoArgsConstructor
 @Data
-@Table(name = "player")
+@Table(name = "player_entity")
 public class PlayerEntity {
     @Id
     @EqualsAndHashCode.Include
