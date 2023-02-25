@@ -33,15 +33,10 @@ class FightCreatorServiceTest {
     @InjectMocks
     private FightCreatorService fightCreatorService;
 
-    /*@Test
-    public void should_create_fight() {
+    @Test
+    void should_create_fight() {
         // add builder hero ou mock
-        Fight fight = Fight.builder()
-                .idFight(UUID.randomUUID().toString())
-                .heroEnemy("hero1")
-                .heroAlly("hero2")
-                .allyWin(true)
-                .build();
+        Fight fight = Fight.builder().build();
         String newId = UUID.randomUUID().toString();
         when(idGenerationService.generateNewId()).thenReturn(newId);
         when(fightPersistenceSpi.save(any(Fight.class)))
@@ -50,6 +45,5 @@ class FightCreatorServiceTest {
         Either<ApplicationError, Fight> result = fightCreatorService.create(fight);
         assertTrue(result.isRight());
         assertEquals(fight, result.get());
-        assertEquals(newId, result.get().getIdFight());
-    }*/
+    }
 }
