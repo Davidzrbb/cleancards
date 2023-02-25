@@ -27,13 +27,10 @@ class HeroFinderAllServiceTest {
 
     @Test
     void shouldReturnEmptyListWhenNoHeroesPersisted() {
-        // Arrange
         when(heroPersistenceSpi.findAll()).thenReturn(new ArrayList<>());
 
-        // Act
         List<Hero> heroes = heroFinderAllService.findAll();
 
-        // Assert
         assertEquals(0, heroes.size());
     }
 

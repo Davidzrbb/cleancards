@@ -5,12 +5,16 @@ import arch.hex.domain.functional.model.Player;
 import arch.hex.domain.functional.service.player_services.PlayerUpdateTokenService;
 import arch.hex.domain.ports.server.model_persistence.PlayerPersistenceSpi;
 import io.vavr.control.Either;
+import lombok.val;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import static io.vavr.API.Left;
+import static io.vavr.API.None;
+import static org.assertj.vavr.api.VavrAssertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -34,14 +38,15 @@ class PlayerUpdateTokenServiceTest {
         assertEquals(Either.right(player.withTokens(10)), result);
     }
 
-   /* @Test
+    @Test
     void givenInvalidToken_whenUpdateToken_thenFailure() {
         Player player = Player.builder().tokens(5).build();
-        when(playerPersistenceSpi.save(player.withTokens(0))).thenReturn(Either.left(ApplicationError.INVALID_ARGUMENTS));
+        val error = new ApplicationError(null, null, null, null);
+        when(playerPersistenceSpi.save(player.withTokens(0))).thenReturn(Left(error));
 
         Either<ApplicationError, Player> result = playerUpdateTokenService.updateToken(player, 0);
 
         verify(playerPersistenceSpi).save(player.withTokens(0));
-        assertEquals(Either.left(ApplicationError), result);
-    }*/
+        assertThat(result).containsLeftSame(error);
+    }
 }

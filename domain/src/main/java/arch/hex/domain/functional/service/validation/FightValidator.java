@@ -5,6 +5,7 @@ import arch.hex.domain.functional.model.Deck;
 import arch.hex.domain.functional.model.Hero;
 import arch.hex.domain.functional.model.Player;
 import arch.hex.domain.functional.service.deck_services.DeckFinderByIdService;
+import io.vavr.control.Option;
 import io.vavr.control.Validation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,8 +21,14 @@ public class FightValidator {
 
     public Validation<ApplicationError, List<Deck>> validateFight(String idAlly, String idEnemy) {
         List<Deck> decks = new ArrayList<>();
-        decks.add(deckFinderByIdService.findById(idAlly).get());
-        decks.add(deckFinderByIdService.findById(idEnemy).get());
+        Option<Deck> deckAlly = deckFinderByIdService.findById(idAlly);
+        Option<Deck> deckEnemy = deckFinderByIdService.findById(idEnemy);
+        if (deckAlly.isEmpty() || deckEnemy.isEmpty()) {
+            return Validation.invalid(new ApplicationError("Deck not found", null, null, null));
+        }else {
+            decks.add(deckAlly.get());
+            decks.add(deckEnemy.get());
+        }
         Hero heroAlly = decks.get(0).getHero();
         Hero heroEnemy = decks.get(1).getHero();
         Player playerAlly = decks.get(0).getPlayer();

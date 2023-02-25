@@ -11,7 +11,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import static io.vavr.API.Right;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -25,12 +27,13 @@ class HeroUpdateExperienceServiceTest {
 
     @Test
     void testUpdateExperienceForWinningFight() {
-        Hero hero = Hero.builder().xp(0).build();
-        when(heroPersistenceSpi.save(hero)).thenReturn(Either.right(hero));
+        Hero hero = Hero.builder().xp(1).build();
+
+        when(heroPersistenceSpi.save(any(Hero.class))).thenReturn(Right(hero));
 
         Either<ApplicationError, Hero> result = heroUpdateExperienceService.updateExperienceForWinningFight(hero);
 
         assertEquals(hero, result.get());
-        assertEquals(1, hero.getXp());
+        assertEquals(1, result.get().getXp());
     }
 }

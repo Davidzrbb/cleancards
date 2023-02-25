@@ -15,5 +15,4 @@ public class PlayerUpdateTokenService {
     public Either<ApplicationError, Player> updateToken(Player player, int token) {
         return playerPersistenceSpi.save(player.withTokens(token));
     }
-
 }

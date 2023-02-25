@@ -15,6 +15,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 
+import static org.assertj.vavr.api.VavrAssertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
@@ -36,7 +37,7 @@ class FightValidatorTest {
 
         Validation<ApplicationError, List<Deck>> result = fightValidator.validateFight(idAlly, idEnemy);
 
-        assertEquals(true, result.isInvalid());
+        assertThat(result).containsInvalidInstanceOf(ApplicationError.class);
         assertEquals("Deck not found", result.getError().context());
     }
 
@@ -70,8 +71,10 @@ class FightValidatorTest {
 
     @Test
     void shouldReturnInvalidWhenPlayerNotFound() {
-        Deck deckAlly = Deck.builder().idDeck(idAlly).player(null).build();
-        Deck deckEnemy = Deck.builder().idDeck(idEnemy).player(null).build();
+        Hero heroAlly = Hero.builder().level(1).build();
+        Hero heroEnemy = Hero.builder().level(1).build();
+        Deck deckAlly = Deck.builder().idDeck(idAlly).hero(heroAlly).player(null).build();
+        Deck deckEnemy = Deck.builder().idDeck(idEnemy).hero(heroEnemy).player(null).build();
         when(deckFinderByIdService.findById(idAlly)).thenReturn(Option.of(deckAlly));
         when(deckFinderByIdService.findById(idEnemy)).thenReturn(Option.of(deckEnemy));
 

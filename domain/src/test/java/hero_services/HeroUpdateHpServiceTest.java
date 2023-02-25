@@ -14,21 +14,14 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class HeroUpdateHpServiceTest {
 
-    @Mock
-    private Hero heroAlly;
-
-    @Mock
-    private Hero heroEnemy;
-
     @InjectMocks
     private HeroUpdateHpService heroUpdateHpService;
 
     @Test
     void testGetHeroWinnerOfFight() {
-        // builder hero ou mock
-        when(heroAlly.getHp()).thenReturn(10);
-        when(heroEnemy.getHp()).thenReturn(10);
+        Hero heroAlly = Hero.builder().hp(10).armor(10).power(20).build();
+        Hero heroEnemy = Hero.builder().hp(10).armor(10).power(20).build();
         Hero expectedWinner = heroUpdateHpService.getHeroWinnerOfFight(heroAlly, heroEnemy);
-        assertEquals(heroAlly, expectedWinner);
+        assertEquals(heroEnemy.withHp(0), expectedWinner);
     }
 }
