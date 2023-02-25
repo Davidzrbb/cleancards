@@ -25,7 +25,6 @@ class HeroUpdateExperienceServiceTest {
 
     @Test
     void testUpdateExperienceForWinningFight() {
-        // Ajouter builder ou mock de hero
         Hero hero = Hero.builder().xp(0).build();
         when(heroPersistenceSpi.save(hero)).thenReturn(Either.right(hero));
 

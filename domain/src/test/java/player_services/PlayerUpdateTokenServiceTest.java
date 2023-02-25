@@ -34,18 +34,13 @@ class PlayerUpdateTokenServiceTest {
         assertEquals(Either.right(player.withTokens(10)), result);
     }
 
-
-    // A corriger
-    /*@Test
+   /* @Test
     void givenInvalidToken_whenUpdateToken_thenFailure() {
-        // Given
         Player player = Player.builder().tokens(5).build();
         when(playerPersistenceSpi.save(player.withTokens(0))).thenReturn(Either.left(ApplicationError.INVALID_ARGUMENTS));
 
-        // When
         Either<ApplicationError, Player> result = playerUpdateTokenService.updateToken(player, 0);
 
-        // Then
         verify(playerPersistenceSpi).save(player.withTokens(0));
         assertEquals(Either.left(ApplicationError), result);
     }*/

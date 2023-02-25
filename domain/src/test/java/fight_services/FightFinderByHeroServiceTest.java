@@ -26,11 +26,6 @@ class FightFinderByHeroServiceTest {
     @InjectMocks
     private FightFinderByHeroService fightFinderByHeroService;
 
-    @BeforeEach
-    void setUp() {
-        MockitoAnnotations.initMocks(this);
-    }
-
     /*@Test
     void testFindByIdHero() {
         // add builder fight ou mock
