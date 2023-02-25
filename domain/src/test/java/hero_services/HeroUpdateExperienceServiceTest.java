@@ -26,7 +26,7 @@ class HeroUpdateExperienceServiceTest {
     private HeroUpdateExperienceService heroUpdateExperienceService;
 
     @Test
-    void testUpdateExperienceForWinningFight() {
+    void should_update_experience_for_winning_fight() {
         Hero hero = Hero.builder().xp(1).build();
 
         when(heroPersistenceSpi.save(any(Hero.class))).thenReturn(Right(hero));

@@ -33,7 +33,7 @@ class DeckCreatorServiceTest {
     private DeckCreatorService deckCreatorService;
 
     @Test
-    void testCreateDeck() {
+    void should_create_deck() {
         String expectedDeckId = UUID.randomUUID().toString();
         when(idGenerationService.generateNewId()).thenReturn(expectedDeckId);
 

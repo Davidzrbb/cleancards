@@ -29,7 +29,7 @@ class CardsPackGetHeroesByDropRateServiceTest {
     private CardsPackGetHeroesByDropRateService cardsPackGetHeroesByDropRateService;
 
     @Test
-    void testGetHeroesByDropRateSilver() {
+    void should_get_heroes_by_drop_rate_silver() {
         CardsPack cardsPack = CardsPack.builder()
                 .legendaryDropRate(0.05)
                 .rareDropRate(0.2)
@@ -45,13 +45,13 @@ class CardsPackGetHeroesByDropRateServiceTest {
 
         ArrayList<Hero> result = cardsPackGetHeroesByDropRateService.getHeroesByDropRate(cardsPack);
 
-        assertEquals(5, countHeroesWithRarity(result, Rarity.LEGENDARY));
-        assertEquals(20, countHeroesWithRarity(result, Rarity.RARE));
-        assertEquals(75, countHeroesWithRarity(result, Rarity.COMMON));
+        assertEquals(5, count_heroes_with_rarity(result, Rarity.LEGENDARY));
+        assertEquals(20, count_heroes_with_rarity(result, Rarity.RARE));
+        assertEquals(75, count_heroes_with_rarity(result, Rarity.COMMON));
     }
 
     @Test
-    void testGetHeroesByDropRateDiamond() {
+    void should_get_heroes_by_drop_rate_diamond() {
         CardsPack cardsPack = CardsPack.builder()
                 .legendaryDropRate(0.15)
                 .rareDropRate(0.35)
@@ -67,12 +67,12 @@ class CardsPackGetHeroesByDropRateServiceTest {
 
         ArrayList<Hero> result = cardsPackGetHeroesByDropRateService.getHeroesByDropRate(cardsPack);
 
-        assertEquals(15, countHeroesWithRarity(result, Rarity.LEGENDARY));
-        assertEquals(35, countHeroesWithRarity(result, Rarity.RARE));
-        assertEquals(50, countHeroesWithRarity(result, Rarity.COMMON));
+        assertEquals(15, count_heroes_with_rarity(result, Rarity.LEGENDARY));
+        assertEquals(35, count_heroes_with_rarity(result, Rarity.RARE));
+        assertEquals(50, count_heroes_with_rarity(result, Rarity.COMMON));
     }
 
-    private int countHeroesWithRarity(ArrayList<Hero> heroes, Rarity rarity) {
+    private int count_heroes_with_rarity(ArrayList<Hero> heroes, Rarity rarity) {
         int count = 0;
         for (Hero hero : heroes) {
             if (hero.getRarity() == rarity) {

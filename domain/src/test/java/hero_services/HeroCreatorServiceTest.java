@@ -33,7 +33,7 @@ class HeroCreatorServiceTest {
     private IdGenerationService idGenerationService;
 
     @Test
-    void testCreate() {
+    void should_create_hero() {
         Hero hero = Hero.builder()
                 .name("John")
                 .rarity(Rarity.COMMON)

@@ -35,7 +35,7 @@ class CardsPackCreatorServiceTest {
     }
 
     @Test
-    void testCreateSilverCardsPack() {
+    void should_create_silver_cards_pack() {
         CardsPack expectedCardsPack = CardsPack.builder()
                 .idCardsPack(UUID.randomUUID().toString())
                 .cardsPackType(CardsPackType.SILVER)
@@ -53,7 +53,7 @@ class CardsPackCreatorServiceTest {
     }
 
     @Test
-    void testCreateDiamondCardsPack() {
+    void should_create_diamond_cards_pack() {
         CardsPack expectedCardsPack = CardsPack.builder()
                 .idCardsPack(UUID.randomUUID().toString())
                 .cardsPackType(CardsPackType.DIAMOND)

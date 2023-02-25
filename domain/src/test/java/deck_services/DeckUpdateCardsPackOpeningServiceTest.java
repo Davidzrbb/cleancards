@@ -34,22 +34,22 @@ class DeckUpdateCardsPackOpeningServiceTest {
     @InjectMocks
     private DeckUpdateCardsPackOpeningService deckUpdateCardsPackOpeningService;
 
-   /* @Test
-    void testUpdateByOpeningCardsPackWhenNoDeckFound() {
-        Player player = Player.builder().idPlayer(UUID.randomUUID().toString()).build();
-        ArrayList<Hero> heroesRandomList = new ArrayList<>();
-        when(deckFinderByPlayerService.findByIdPlayer(player.getIdPlayer())).thenReturn(List.of());
-
-        Either<ApplicationError, Deck> result = deckUpdateCardsPackOpeningService.updateByOpeningCardsPack(player, heroesRandomList);
-
-        assertEquals(ApplicationError.class, result.getLeft().getClass());
-        assertEquals("No deck found for player", result.getLeft().context());
-        assertEquals(player, result.getLeft().getPlayer());
-        verifyNoInteractions(deckPersistenceSpi, heroGetRandomByCardsPackOpeningService);
-    }*/
+//    @Test
+//    void test_update_by_opening_cards_pack_when_no_deck_found() {
+//        Player player = Player.builder().idPlayer(UUID.randomUUID().toString()).build();
+//        ArrayList<Hero> heroesRandomList = new ArrayList<>();
+//        when(deckFinderByPlayerService.findByIdPlayer(player.getIdPlayer())).thenReturn(List.of());
+//
+//        Either<ApplicationError, Deck> result = deckUpdateCardsPackOpeningService.updateByOpeningCardsPack(player, heroesRandomList);
+//
+//        assertEquals(ApplicationError.class, result.getLeft().getClass());
+//        assertEquals("No deck found for player", result.getLeft().context());
+//        assertEquals(player, result.getRight().player());
+//        verifyNoInteractions(deckPersistenceSpi, heroGetRandomByCardsPackOpeningService);
+//    }
 
     @Test
-    void testUpdateByOpeningCardsPackWhenDeckHasHero() {
+    void test_update_by_opening_cards_pack_when_deck_has_hero() {
         Player player = Player.builder().idPlayer(UUID.randomUUID().toString()).build();
         ArrayList<Hero> heroesRandomList = new ArrayList<>();
         Hero hero = Hero.builder().idHero(UUID.randomUUID().toString()).build();
@@ -67,7 +67,7 @@ class DeckUpdateCardsPackOpeningServiceTest {
     }
 
     @Test
-    void testUpdateByOpeningCardsPackWhenDeckHasNoHero() {
+    void test_update_by_opening_cards_pack_when_deck_has_no_hero() {
         Player player = Player.builder().idPlayer(UUID.randomUUID().toString()).build();
         ArrayList<Hero> heroesRandomList = new ArrayList<>();
         Hero hero = Hero.builder().idHero(UUID.randomUUID().toString()).build();

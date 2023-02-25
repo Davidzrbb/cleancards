@@ -27,7 +27,7 @@ class FightFinderByHeroServiceTest {
     private FightFinderByHeroService fightFinderByHeroService;
 
     /*@Test
-    void testFindByIdHero() {
+    void should_find_by_id_hero() {
         // add builder fight ou mock
         String idHero = "hero123";
         List<Fight> expectedFights = new ArrayList<>();

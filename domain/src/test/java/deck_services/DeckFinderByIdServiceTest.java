@@ -24,7 +24,7 @@ class DeckFinderByIdServiceTest {
     private DeckPersistenceSpi deckPersistenceSpi;
 
     @Test
-    void testFindByIdWhenDeckExists() {
+    void should_find_by_id_when_deck_exist() {
         String idDeck = "deckId";
         Player player = Player.builder().pseudo("player1").build();
         Hero hero = Hero.builder().name("player1").build();
@@ -41,7 +41,7 @@ class DeckFinderByIdServiceTest {
     }
 
     @Test
-    void testFindByIdWhenDeckDoesNotExist() {
+    void should_return_none_when_deck_not_exist() {
         String idDeck = "nonExistentDeckId";
         when(deckPersistenceSpi.findById(idDeck)).thenReturn(Option.none());
 

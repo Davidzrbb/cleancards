@@ -1,47 +1,49 @@
 package hero_services;
 
-import arch.hex.domain.functional.enums.Rarity;
-import arch.hex.domain.functional.model.Hero;
-import arch.hex.domain.functional.service.hero_services.HeroGetRandomByCardsPackOpeningService;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
-
-import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+
+import arch.hex.domain.functional.model.Hero;
+import arch.hex.domain.functional.service.hero_services.HeroGetRandomByCardsPackOpeningService;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
 class HeroGetRandomByCardsPackOpeningServiceTest {
 
-    @Mock
-    private ArrayList<Hero> mockHeroesList;
+    @InjectMocks
+    private HeroGetRandomByCardsPackOpeningService service;
 
-    @InjectMocks private HeroGetRandomByCardsPackOpeningService heroGetRandomByCardsPackOpeningService;
+    @ParameterizedTest
+    @CsvSource({
+            "1,hero1,1",
+            "2,hero2,2",
+            "3,hero3,3",
+            "1,hero1,4",
+            "2,hero2,5",
+            "3,hero3,6"
+    })
+    void testGetRandomHeroFromListHero(int id, String name) {
+        Hero hero = Hero.builder().idHero(Integer.toString(id)).name(name).build();
+        Hero hero2 = Hero.builder().idHero(Integer.toString(id)).name(name).build();
+        Hero hero3 = Hero.builder().idHero(Integer.toString(id)).name(name).build();
+        List<Hero> heroes = new ArrayList<>();
+        heroes.add(hero);
+        heroes.add(hero2);
+        heroes.add(hero3);
 
-    /*@Test
-    public void testGetRandomHeroFromListHero() {
+        Hero actualHero = service.getRandomHeroFromListHero((ArrayList<Hero>) heroes);
 
-        // Ajouter un builder ou mock de hero
-        Hero hero1 = new Hero("1", "Hero 1", Rarity.COMMON, null, 1, 0, 100, 50, 10);
-        Hero hero2 = new Hero("2", "Hero 2", Rarity.RARE, null, 1, 0, 150, 75, 15);
-        Hero hero3 = new Hero("3", "Hero 3", Rarity.LEGENDARY, null, 1, 0, 200, 100, 20);
-
-        mockHeroesList.add(hero1);
-        mockHeroesList.add(hero2);
-        mockHeroesList.add(hero3);
-
-        when(mockHeroesList.size()).thenReturn(3);
-        when(mockHeroesList.get(0)).thenReturn(hero1);
-        when(mockHeroesList.get(1)).thenReturn(hero2);
-        when(mockHeroesList.get(2)).thenReturn(hero3);
-        when(Math.random()).thenReturn(0.5);
-
-        Hero result = heroGetRandomByCardsPackOpeningService.getRandomHeroFromListHero(mockHeroesList);
-
-        assertEquals(hero2, result);
-    }*/
+        assertEquals(hero, actualHero);
+    }
 }

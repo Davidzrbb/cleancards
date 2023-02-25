@@ -33,7 +33,7 @@ class PlayerCreatorServiceTest {
     private DeckCreatorService deckCreatorService;
 
     @Test
-    void testCreate() {
+    void should_create_player() {
         String pseudo = "Test Pseudo";
         Player player = Player.builder()
                 .idPlayer(String.valueOf(1))

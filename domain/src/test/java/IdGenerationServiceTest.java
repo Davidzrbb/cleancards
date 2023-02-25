@@ -17,7 +17,7 @@ class IdGenerationServiceTest {
     private IdGenerationService service;
 
     @Test
-    void generateNewId_should_return_a_valid_uuid() {
+    void should_return_a_valid_uuid() {
         String result = service.generateNewId();
 
         UUID.fromString(result);

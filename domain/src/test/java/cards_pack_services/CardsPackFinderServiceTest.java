@@ -25,7 +25,7 @@ class CardsPackFinderServiceTest {
     private CardsPackFinderService cardsPackFinderService;
 
     @Test
-    void testFindByIdWhenCardsPackExists() {
+    void should_find_by_id_when_cards_pack_exists() {
         CardsPack cardsPack1 = CardsPack.builder().idCardsPack("1").build();
         when(cardsPackPersistenceSpi.findById(cardsPack1.getIdCardsPack())).thenReturn(Option.of(cardsPack1));
 
@@ -38,7 +38,7 @@ class CardsPackFinderServiceTest {
     }
 
     @Test
-    void testFindByIdWhenCardsPackDoesNotExist() {
+    void should_return_empty_when_cards_pack_does_not_exist() {
         CardsPack cardsPack1 = CardsPack.builder().idCardsPack("1").build();
         when(cardsPackPersistenceSpi.findById(cardsPack1.getIdCardsPack())).thenReturn(Option.none());
 

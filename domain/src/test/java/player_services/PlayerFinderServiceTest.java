@@ -23,7 +23,7 @@ class PlayerFinderServiceTest {
     private PlayerPersistenceSpi playerPersistenceSpi;
 
     @Test
-    void testFindById() {
+    void should_find_by_id() {
         String idPlayer = "1";
         Player player = Player.builder()
                 .idPlayer(String.valueOf(1))

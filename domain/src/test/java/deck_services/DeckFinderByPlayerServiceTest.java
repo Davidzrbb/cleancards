@@ -27,7 +27,7 @@ class DeckFinderByPlayerServiceTest {
     private DeckPersistenceSpi deckPersistenceSpi;
 
     @Test
-    void testFindByIdPlayerWhenDecksExist() {
+    void should_find_by_id_player_when_decks_exist() {
         String expectedPlayerId = UUID.randomUUID().toString();
 
         Player player = Player.builder().idPlayer(expectedPlayerId).build();
@@ -42,7 +42,7 @@ class DeckFinderByPlayerServiceTest {
     }
 
     @Test
-    void testFindByIdPlayerWhenNoDecksExist() {
+    void should_find_by_id_player_when_no_decks_exist() {
         String idPlayer = "player2";
         List<Deck> expectedDecks = Arrays.asList();
         when(deckPersistenceSpi.findByIdPlayer(idPlayer)).thenReturn(expectedDecks);

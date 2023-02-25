@@ -28,7 +28,7 @@ class PlayerUpdateTokenServiceTest {
     @InjectMocks private PlayerUpdateTokenService playerUpdateTokenService;
 
     @Test
-    void givenValidPlayerAndToken_whenUpdateToken_thenSuccess() {
+    void given_valid_player_and_token_when_update_token_then_success() {
         Player player = Player.builder().tokens(5).build();
         when(playerPersistenceSpi.save(player.withTokens(10))).thenReturn(Either.right(player.withTokens(10)));
 
@@ -39,7 +39,7 @@ class PlayerUpdateTokenServiceTest {
     }
 
     @Test
-    void givenInvalidToken_whenUpdateToken_thenFailure() {
+    void given_invalid_token_when_update_token_then_failure() {
         Player player = Player.builder().tokens(5).build();
         val error = new ApplicationError(null, null, null, null);
         when(playerPersistenceSpi.save(player.withTokens(0))).thenReturn(Left(error));

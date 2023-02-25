@@ -31,7 +31,7 @@ class FightValidatorTest {
     String idEnemy = "idEnemy";
 
     @Test
-    void shouldReturnInvalidWhenDeckNotFound() {
+    void should_return_invalid_when_deck_not_found() {
         when(deckFinderByIdService.findById(idAlly)).thenReturn(Option.none());
         when(deckFinderByIdService.findById(idEnemy)).thenReturn(Option.none());
 
@@ -42,7 +42,7 @@ class FightValidatorTest {
     }
 
     @Test
-    void shouldReturnInvalidWhenHeroNotFound() {
+    void should_return_invalid_when_hero_not_found() {
         Deck deckAlly = Deck.builder().idDeck(idAlly).hero(null).build();
         Deck deckEnemy = Deck.builder().idDeck(idEnemy).hero(null).build();
         when(deckFinderByIdService.findById(idAlly)).thenReturn(Option.of(deckAlly));
@@ -55,7 +55,7 @@ class FightValidatorTest {
     }
 
     @Test
-    void shouldReturnInvalidWhenHeroLevelIsTooHigh() {
+    void should_return_invalid_when_hero_level_is_too_high() {
         Hero heroAlly = Hero.builder().level(3).build();
         Hero heroEnemy = Hero.builder().level(2).build();
         Deck deckAlly = Deck.builder().idDeck(idAlly).hero(heroAlly).build();
@@ -70,7 +70,7 @@ class FightValidatorTest {
     }
 
     @Test
-    void shouldReturnInvalidWhenPlayerNotFound() {
+    void should_return_invalid_when_player_not_found() {
         Hero heroAlly = Hero.builder().level(1).build();
         Hero heroEnemy = Hero.builder().level(1).build();
         Deck deckAlly = Deck.builder().idDeck(idAlly).hero(heroAlly).player(null).build();

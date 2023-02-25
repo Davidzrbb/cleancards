@@ -34,7 +34,7 @@ class FightCreatorServiceTest {
     private FightCreatorService fightCreatorService;
 
     /*@Test
-    public void createFightTest() {
+    public void should_create_fight() {
         // add builder hero ou mock
         Fight fight = Fight.builder()
                 .idFight(UUID.randomUUID().toString())

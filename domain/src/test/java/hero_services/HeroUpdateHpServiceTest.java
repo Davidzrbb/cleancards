@@ -18,7 +18,7 @@ class HeroUpdateHpServiceTest {
     private HeroUpdateHpService heroUpdateHpService;
 
     @Test
-    void testGetHeroWinnerOfFight() {
+    void should_return_winner_of_fight() {
         Hero heroAlly = Hero.builder().hp(10).armor(10).power(20).build();
         Hero heroEnemy = Hero.builder().hp(10).armor(10).power(20).build();
         Hero expectedWinner = heroUpdateHpService.getHeroWinnerOfFight(heroAlly, heroEnemy);

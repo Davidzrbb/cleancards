@@ -32,7 +32,7 @@ class HeroFinderRarityServiceTest {
     }
 
     @Test
-    void findByRarity_shouldReturnHeroWithMatchingRarity_whenHeroWithMatchingRarityExists() {
+    void should_return_hero_with_matching_rarity() {
         Rarity rarity = Rarity.COMMON;
         Hero expectedHero = Hero.builder()
                 .idHero(String.valueOf(1L))
@@ -53,7 +53,7 @@ class HeroFinderRarityServiceTest {
     }
 
     @Test
-    void findByRarity_shouldReturnNone_whenNoHeroWithMatchingRarityExists() {
+    void should_return_none_when_no_hero_with_matching_rarity_exists() {
         Rarity rarity = Rarity.COMMON;
         when(heroPersistenceSpi.findByRarity(rarity)).thenReturn(Option.none());
 

@@ -26,7 +26,7 @@ class HeroFinderAllServiceTest {
     @InjectMocks private HeroFinderAllService heroFinderAllService;
 
     @Test
-    void shouldReturnEmptyListWhenNoHeroesPersisted() {
+    void should_return_empty_list_when_no_heroes_persisted() {
         when(heroPersistenceSpi.findAll()).thenReturn(new ArrayList<>());
 
         List<Hero> heroes = heroFinderAllService.findAll();
@@ -35,7 +35,7 @@ class HeroFinderAllServiceTest {
     }
 
     @Test
-    void shouldReturnListOfHeroesWhenHeroesPersisted() {
+    void should_return_list_of_heroes_when_heroes_persisted() {
 
         List<Hero> heroes = new ArrayList<>();
         Hero hero1 = Hero.builder()
