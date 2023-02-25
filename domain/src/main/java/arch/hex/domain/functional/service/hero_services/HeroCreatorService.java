@@ -63,5 +63,3 @@ public class HeroCreatorService implements HeroCreatorApi {
                 .build());
     }
 }
-
-

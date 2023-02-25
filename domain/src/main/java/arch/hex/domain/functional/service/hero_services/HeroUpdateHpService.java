@@ -15,5 +15,4 @@ public class HeroUpdateHpService {
         }
         return heroAlly.getHp() > 0 ? heroAlly : heroEnemy;
     }
-
 }

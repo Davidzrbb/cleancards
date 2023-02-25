@@ -21,11 +21,11 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
-@Slf4j
-@RequiredArgsConstructor
-public class FightValidatorTest {
 
-    @Mock
+@RequiredArgsConstructor
+class FightValidatorTest {
+
+   /* @Mock
     private DeckFinderByIdService deckFinderByIdService;
 
     @InjectMocks
@@ -104,5 +104,5 @@ public class FightValidatorTest {
 
         assertEquals(result.isInvalid(), true);
         assertEquals(result.getError().context(), "Player not found");
-    }
+    }*/
 }

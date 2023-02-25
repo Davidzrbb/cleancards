@@ -7,18 +7,21 @@ import arch.hex.domain.functional.service.deck_services.DeckCreatorService;
 import arch.hex.domain.functional.service.player_services.PlayerCreatorService;
 import arch.hex.domain.ports.server.model_persistence.PlayerPersistenceSpi;
 import io.vavr.control.Either;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
-public class PlayerCreatorServiceTest {
+@ExtendWith(MockitoExtension.class)
+class PlayerCreatorServiceTest {
 
-    private PlayerCreatorService playerCreatorService;
+    @InjectMocks private PlayerCreatorService playerCreatorService;
 
     @Mock
     private PlayerPersistenceSpi playerPersistenceSpi;
@@ -28,12 +31,6 @@ public class PlayerCreatorServiceTest {
 
     @Mock
     private DeckCreatorService deckCreatorService;
-
-    @BeforeEach
-    void setUp() {
-        MockitoAnnotations.initMocks(this);
-        playerCreatorService = new PlayerCreatorService(playerPersistenceSpi, idGenerationService, deckCreatorService);
-    }
 
     @Test
     void testCreate() {

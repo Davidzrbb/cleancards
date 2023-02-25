@@ -1,4 +1,4 @@
 package deck_services;
 
-public class DeckUpdateCardsPackOpeningServiceTest {
+class DeckUpdateCardsPackOpeningServiceTest {
 }

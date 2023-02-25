@@ -8,12 +8,16 @@ import io.vavr.control.Option;
 import io.vavr.control.Validation;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
+@ExtendWith(MockitoExtension.class)
 class CardsPackOpeningValidatorTest {
 
     @Mock
@@ -22,13 +26,7 @@ class CardsPackOpeningValidatorTest {
     @Mock
     private Player player;
 
-    private CardsPackOpeningValidator validator;
-
-    @BeforeEach
-    void setUp() {
-        MockitoAnnotations.openMocks(this);
-        validator = new CardsPackOpeningValidator();
-    }
+    @InjectMocks private CardsPackOpeningValidator validator;
 
     @Test
     void validate_should_return_valid() {
