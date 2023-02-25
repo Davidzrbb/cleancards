@@ -26,13 +26,13 @@ class HeroFinderRarityServiceTest {
     @InjectMocks private HeroFinderRarityService heroFinderRarityService;
 
     @BeforeEach
-    public void setup() {
+    void setup() {
         MockitoAnnotations.initMocks(this);
         heroFinderRarityService = new HeroFinderRarityService(heroPersistenceSpi);
     }
 
     @Test
-    public void findByRarity_shouldReturnHeroWithMatchingRarity_whenHeroWithMatchingRarityExists() {
+    void findByRarity_shouldReturnHeroWithMatchingRarity_whenHeroWithMatchingRarityExists() {
         Rarity rarity = Rarity.COMMON;
         Hero expectedHero = Hero.builder()
                 .idHero(String.valueOf(1L))
@@ -53,7 +53,7 @@ class HeroFinderRarityServiceTest {
     }
 
     @Test
-    public void findByRarity_shouldReturnNone_whenNoHeroWithMatchingRarityExists() {
+    void findByRarity_shouldReturnNone_whenNoHeroWithMatchingRarityExists() {
         Rarity rarity = Rarity.COMMON;
         when(heroPersistenceSpi.findByRarity(rarity)).thenReturn(Option.none());
 

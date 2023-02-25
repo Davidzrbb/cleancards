@@ -24,7 +24,7 @@ class HeroUpdateHpServiceTest {
     private HeroUpdateHpService heroUpdateHpService;
 
     @Test
-    public void testGetHeroWinnerOfFight() {
+    void testGetHeroWinnerOfFight() {
         // builder hero ou mock
         when(heroAlly.getHp()).thenReturn(10);
         when(heroEnemy.getHp()).thenReturn(10);

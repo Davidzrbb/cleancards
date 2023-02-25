@@ -8,7 +8,7 @@ import arch.hex.domain.functional.service.deck_services.DeckFinderByIdService;
 import arch.hex.domain.functional.service.validation.FightValidator;
 import io.vavr.control.Validation;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
