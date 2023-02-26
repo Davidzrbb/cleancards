@@ -36,4 +36,20 @@ class HeroUpdateExperienceServiceTest {
         assertEquals(hero, result.get());
         assertEquals(1, result.get().getXp());
     }
+
+    @Test
+    void should_update_experience_for_winning_fight_and_level_up() {
+        Hero hero = Hero.builder().xp(4).level(0).hp(10).armor(10).power(10).build();
+
+        when(heroPersistenceSpi.save(any(Hero.class))).thenReturn(Right(hero.withXp(0).withLevel(1).withHp(11).withArmor(11).withPower(11)));
+
+        Either<ApplicationError, Hero> result = heroUpdateExperienceService.updateExperienceForWinningFight(hero);
+
+        assertEquals(hero.withXp(0).withLevel(1).withHp(11).withArmor(11).withPower(11), result.get());
+        assertEquals(0, result.get().getXp());
+        assertEquals(1, result.get().getLevel());
+        assertEquals(11, result.get().getHp());
+        assertEquals(11, result.get().getArmor());
+        assertEquals(11, result.get().getPower());
+    }
 }
