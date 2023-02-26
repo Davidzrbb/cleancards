@@ -5,6 +5,7 @@ import lombok.*;
 import arch.hex.domain.functional.enums.Rarity;
 import arch.hex.domain.functional.enums.Speciality;
 
+
 import javax.persistence.*;
 
 @Entity
