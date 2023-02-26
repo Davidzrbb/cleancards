@@ -16,8 +16,10 @@ import arch.hex.domain.ports.server.model_persistence.CardsPackPersistenceSpi;
 import arch.hex.server.adapter.CardsPackDataBaseAdapter;
 import arch.hex.server.repository.CardsPackRepository;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 
+@Configuration
 public class CardsPackDomainConfig {
 
     @Bean

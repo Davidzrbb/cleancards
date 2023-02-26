@@ -13,9 +13,10 @@ import arch.hex.domain.ports.server.model_persistence.DeckPersistenceSpi;
 import arch.hex.server.adapter.DeckDataBaseAdapter;
 import arch.hex.server.repository.DeckRepository;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 
-
+@Configuration
 public class DeckDomainConfig {
     @Bean
     @Primary

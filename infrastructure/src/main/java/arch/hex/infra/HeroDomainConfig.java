@@ -8,8 +8,10 @@ import arch.hex.domain.ports.server.model_persistence.HeroPersistenceSpi;
 import arch.hex.server.adapter.HeroDataBaseAdapter;
 import arch.hex.server.repository.HeroRepository;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 
+@Configuration
 public class HeroDomainConfig {
     @Bean
     @Primary

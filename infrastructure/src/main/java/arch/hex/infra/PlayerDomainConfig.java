@@ -11,8 +11,9 @@ import arch.hex.domain.ports.server.model_persistence.PlayerPersistenceSpi;
 import arch.hex.server.adapter.PlayerDataBaseAdapter;
 import arch.hex.server.repository.PlayerRepository;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
-
+@Configuration
 public class PlayerDomainConfig {
     @Bean
     @Primary
