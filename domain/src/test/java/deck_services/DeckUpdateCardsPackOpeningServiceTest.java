@@ -17,6 +17,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
+import static io.vavr.control.Option.none;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
@@ -34,36 +36,36 @@ class DeckUpdateCardsPackOpeningServiceTest {
     @InjectMocks
     private DeckUpdateCardsPackOpeningService deckUpdateCardsPackOpeningService;
 
-//    @Test
-//    void test_update_by_opening_cards_pack_when_no_deck_found() {
-//        Player player = Player.builder().idPlayer(UUID.randomUUID().toString()).build();
-//        ArrayList<Hero> heroesRandomList = new ArrayList<>();
-//        when(deckFinderByPlayerService.findByIdPlayer(player.getIdPlayer())).thenReturn(List.of());
-//
-//        Either<ApplicationError, Deck> result = deckUpdateCardsPackOpeningService.updateByOpeningCardsPack(player, heroesRandomList);
-//
-//        assertEquals(ApplicationError.class, result.getLeft().getClass());
-//        assertEquals("No deck found for player", result.getLeft().context());
-//        assertEquals(player, result.getRight().player());
-//        verifyNoInteractions(deckPersistenceSpi, heroGetRandomByCardsPackOpeningService);
-//    }
-
     @Test
-    void test_update_by_opening_cards_pack_when_deck_has_hero() {
+    void should_update_by_opening_cards_pack_when_no_deck_found() {
         Player player = Player.builder().idPlayer(UUID.randomUUID().toString()).build();
         ArrayList<Hero> heroesRandomList = new ArrayList<>();
-        Hero hero = Hero.builder().idHero(UUID.randomUUID().toString()).build();
-        Deck deck = Deck.builder().idDeck(UUID.randomUUID().toString()).player(player).hero(hero).build();
-
-        when(deckFinderByPlayerService.findByIdPlayer(player.getIdPlayer())).thenReturn(List.of(deck));
-        when(heroGetRandomByCardsPackOpeningService.getRandomHeroFromListHero(heroesRandomList)).thenReturn(hero);
-        when(deckPersistenceSpi.save(any())).thenReturn(Either.right(deck));
+        List<Deck> deck = new ArrayList<>();
+        when(deckFinderByPlayerService.findByIdPlayer(player.getIdPlayer())).thenReturn(deck);
 
         Either<ApplicationError, Deck> result = deckUpdateCardsPackOpeningService.updateByOpeningCardsPack(player, heroesRandomList);
 
-        assertEquals(Either.class, result.getClass());
-        assertEquals(Deck.class, result.get().getClass());
-        verify(deckPersistenceSpi, times(1)).save(any());
+        assertEquals(ApplicationError.class, result.getLeft().getClass());
+        assertEquals("No deck found for player", result.getLeft().context());
+        verifyNoInteractions(deckPersistenceSpi, heroGetRandomByCardsPackOpeningService);
+    }
+
+    @Test
+    void should_update_by_opening_cards_pack_when_deck_has_hero() {
+        Player player = Player.builder().idPlayer(UUID.randomUUID().toString()).build();
+        ArrayList<Hero> heroesRandomList = new ArrayList<>();
+        Hero hero = Hero.builder().idHero(UUID.randomUUID().toString()).build();
+        Hero newHero = Hero.builder().idHero(UUID.randomUUID().toString()).build();
+        Deck deck = Deck.builder().idDeck(UUID.randomUUID().toString()).player(player).hero(hero).build();
+        Deck newDeck = Deck.builder().idDeck(UUID.randomUUID().toString()).player(player).build();
+
+        when(deckFinderByPlayerService.findByIdPlayer(player.getIdPlayer())).thenReturn(List.of(deck));
+        when(heroGetRandomByCardsPackOpeningService.getRandomHeroFromListHero(heroesRandomList)).thenReturn(newHero);
+        when(deckPersistenceSpi.save(any())).thenReturn(Either.right(newDeck.withHero(newHero)));
+
+        Either<ApplicationError, Deck> result = deckUpdateCardsPackOpeningService.updateByOpeningCardsPack(player, heroesRandomList);
+
+        assertEquals(newDeck.withHero(newHero), result.get());
     }
 
     @Test
@@ -75,12 +77,10 @@ class DeckUpdateCardsPackOpeningServiceTest {
 
         when(deckFinderByPlayerService.findByIdPlayer(player.getIdPlayer())).thenReturn(List.of(deck));
         when(heroGetRandomByCardsPackOpeningService.getRandomHeroFromListHero(heroesRandomList)).thenReturn(hero);
-        when(deckPersistenceSpi.save(any())).thenReturn(Either.right(deck));
+        when(deckPersistenceSpi.save(any())).thenReturn(Either.right(deck.withHero(hero)));
 
         Either<ApplicationError, Deck> result = deckUpdateCardsPackOpeningService.updateByOpeningCardsPack(player, heroesRandomList);
 
-        assertEquals(Either.class, result.getClass());
-        assertEquals(Deck.class, result.get().getClass());
-        verify(deckPersistenceSpi, times(1)).save(any());
+        assertEquals(deck.withHero(hero), result.get());
     }
 }

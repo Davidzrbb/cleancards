@@ -1,8 +1,10 @@
 package cards_pack_services;
 
 import arch.hex.domain.ApplicationError;
+import arch.hex.domain.functional.enums.CardsPackType;
 import arch.hex.domain.functional.model.CardsPack;
 import arch.hex.domain.functional.model.Deck;
+import arch.hex.domain.functional.model.Hero;
 import arch.hex.domain.functional.model.Player;
 import arch.hex.domain.functional.service.cards_pack_services.CardsPackFinderService;
 import arch.hex.domain.functional.service.cards_pack_services.CardsPackGetHeroesByDropRateService;
@@ -21,9 +23,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -56,7 +60,6 @@ class CardsPackOpeningByIdPlayerAndIdCardsPackServiceTest {
 
         val idCardsPack = UUID.randomUUID().toString();
         val idPlayer = UUID.randomUUID().toString();
-        CardsPack cardsPack = CardsPack.builder().idCardsPack(idCardsPack).build();
         Player player = Player.builder().idPlayer(idPlayer).build();
         when(cardsPackFinderService.findById(any())).thenReturn(Option.none());
         when(playerFinderService.findById(any())).thenReturn(Option.of(player));
@@ -64,22 +67,33 @@ class CardsPackOpeningByIdPlayerAndIdCardsPackServiceTest {
 
         Either<ApplicationError, List<Deck>> result = cardsPackOpeningService.getDecksByCardsPackAndPlayer(idCardsPack, idPlayer);
 
-        assert result.isLeft();
+        assertEquals(true, result.isLeft());
+        assertEquals("CardsPack not found", result.getLeft().context());
     }
 
-   /* @Test
-    public void should_return_error_when_player_not_found() {
+    @Test
+    void should_return_error_when_player_not_found() {
+        val idCardsPack = UUID.randomUUID().toString();
+        val idPlayer = UUID.randomUUID().toString();
+        CardsPack cardsPack = CardsPack.builder().idCardsPack(idCardsPack).build();
+
         when(cardsPackFinderService.findById(any())).thenReturn(Option.of(cardsPack));
         when(playerFinderService.findById(any())).thenReturn(Option.none());
         when(cardsPackOpeningValidator.validate(any(), any())).thenReturn(Validation.valid(true));
 
         Either<ApplicationError, List<Deck>> result = cardsPackOpeningService.getDecksByCardsPackAndPlayer(idCardsPack, idPlayer);
 
-        assert result.isLeft();
+        assertEquals(true, result.isLeft());
+        assertEquals("Player not found", result.getLeft().context());
     }
 
     @Test
-    public void should_return_error_when_validation_fails() {
+    void should_return_error_when_validation_fails() {
+        val idCardsPack = UUID.randomUUID().toString();
+        val idPlayer = UUID.randomUUID().toString();
+        Player player = Player.builder().idPlayer(idPlayer).build();
+        CardsPack cardsPack = CardsPack.builder().idCardsPack(idCardsPack).build();
+
         when(cardsPackFinderService.findById(any())).thenReturn(Option.of(cardsPack));
         when(playerFinderService.findById(any())).thenReturn(Option.of(player));
         ApplicationError error = new ApplicationError(null, null,null , null);
@@ -87,6 +101,31 @@ class CardsPackOpeningByIdPlayerAndIdCardsPackServiceTest {
 
         Either<ApplicationError, List<Deck>> result = cardsPackOpeningService.getDecksByCardsPackAndPlayer(idCardsPack, idPlayer);
 
-        assert result.isLeft();
-    }*/
+        assertEquals(true, result.isLeft());
+    }
+
+    @Test
+    void should_return_decks_when_cards_pack_and_player_found() {
+        val idCardsPack = UUID.randomUUID().toString();
+        val idPlayer = UUID.randomUUID().toString();
+        Player player = Player.builder().idPlayer(idPlayer).tokens(2).build();
+        CardsPack cardsPack = CardsPack.builder().cardsPackType(CardsPackType.SILVER).requiredTokens(1).idCardsPack(idCardsPack).cardsNumber(10).build();
+        Deck deck = Deck.builder().idDeck(UUID.randomUUID().toString()).build();
+        Hero hero = Hero.builder().idHero(UUID.randomUUID().toString()).build();
+
+        when(cardsPackFinderService.findById(any())).thenReturn(Option.of(cardsPack));
+        when(playerFinderService.findById(any())).thenReturn(Option.of(player));
+        when(cardsPackOpeningValidator.validate(any(), any())).thenReturn(Validation.valid(true));
+        ArrayList<Hero> heroes = new ArrayList<Hero>();
+        heroes.add(hero);
+        when(cardsPackGetHeroesByDropRateService.getHeroesByDropRate(any())).thenReturn(heroes);
+        when(deckUpdateCardsPackOpeningService.updateByOpeningCardsPack(player, heroes)).thenReturn(Either.right(deck.withHero(hero)));
+        when(playerUpdateTokenService.updateToken(player, 1)).thenReturn(Either.right(player.withTokens(1)));
+
+        Either<ApplicationError, List<Deck>> result = cardsPackOpeningService.getDecksByCardsPackAndPlayer(idCardsPack, idPlayer);
+
+        assertEquals(true, result.isRight());
+        assertEquals(10, result.get().size());
+        assertEquals(hero, result.get().get(5).getHero());
+    }
 }

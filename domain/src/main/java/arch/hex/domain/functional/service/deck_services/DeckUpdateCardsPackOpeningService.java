@@ -20,7 +20,6 @@ public class DeckUpdateCardsPackOpeningService  {
 
     private final DeckFinderByPlayerService deckFinderByPlayerService;
     private final DeckPersistenceSpi deckPersistenceSpi;
-
     private final HeroGetRandomByCardsPackOpeningService heroGetRandomByCardsPackOpening;
 
     public Either<ApplicationError, Deck> updateByOpeningCardsPack(Player player, ArrayList<Hero> heroesRandomList) {

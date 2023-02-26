@@ -9,7 +9,6 @@ import io.vavr.control.Validation;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -18,18 +17,12 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class CardsPackOpeningValidatorTest {
 
-    @Mock
-    private CardsPack cardsPack;
-
-    @Mock
-    private Player player;
-
     @InjectMocks private CardsPackOpeningValidator validator;
 
     @Test
     void validate_should_return_valid() {
-        when(cardsPack.getRequiredTokens()).thenReturn(5);
-        when(player.getTokens()).thenReturn(10);
+        CardsPack cardsPack = CardsPack.builder().requiredTokens(10).build();
+        Player player = Player.builder().tokens(20).build();
 
         Validation<ApplicationError, Boolean> result = validator.validate(Option.of(cardsPack), Option.of(player));
         assertTrue(result.isValid());
@@ -37,14 +30,17 @@ class CardsPackOpeningValidatorTest {
 
     @Test
     void validate_should_return_invalid_when_cards_pack_is_empty() {
+        Player player = Player.builder().tokens(20).build();
+
         Validation<ApplicationError, Boolean> result = validator.validate(Option.none(), Option.of(player));
         assertFalse(result.isValid());
         ApplicationError error = result.getError();
         assertEquals("CardsPack not found", error.context());
     }
-
     @Test
     void validate_should_return_invalid_when_player_is_empty() {
+        CardsPack cardsPack = CardsPack.builder().requiredTokens(10).build();
+
         Validation<ApplicationError, Boolean> result = validator.validate(Option.of(cardsPack), Option.none());
         assertFalse(result.isValid());
         ApplicationError error = result.getError();
@@ -53,8 +49,8 @@ class CardsPackOpeningValidatorTest {
 
     @Test
     void validate_should_return_invalid_when_not_enough_coins() {
-        when(cardsPack.getRequiredTokens()).thenReturn(10);
-        when(player.getTokens()).thenReturn(5);
+        CardsPack cardsPack = CardsPack.builder().requiredTokens(10).build();
+        Player player = Player.builder().tokens(5).build();
 
         Validation<ApplicationError, Boolean> result = validator.validate(Option.of(cardsPack), Option.of(player));
 

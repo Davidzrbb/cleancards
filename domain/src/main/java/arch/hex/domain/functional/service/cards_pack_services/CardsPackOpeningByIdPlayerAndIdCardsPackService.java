@@ -39,6 +39,12 @@ public class CardsPackOpeningByIdPlayerAndIdCardsPackService implements CardsPac
         if (validation.isInvalid()) {
             return Either.left(validation.getError());
         }
+        if (cardsPack.isEmpty()) {
+            return Either.left(new ApplicationError("CardsPack not found", null, null, null));
+        }
+        if (player.isEmpty()) {
+            return Either.left(new ApplicationError("Player not found", null, null, null));
+        }
         ArrayList<Hero> randomHeroes = cardsPackGetHeroesByDropRateService.getHeroesByDropRate(cardsPack.get());
         Either<ApplicationError, List<Deck>> decks = createDecksByRandomHeroesAndPlayerAndCardsNumber(randomHeroes, player.get(), cardsPack.get().getCardsNumber());
         if (decks.isRight()) {
