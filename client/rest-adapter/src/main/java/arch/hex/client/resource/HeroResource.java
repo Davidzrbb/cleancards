@@ -1,14 +1,12 @@
 package arch.hex.client.resource;
 
 import arch.hex.client.dto.hero_dto.HeroCreationDto;
-import arch.hex.client.mapper.FightDtoMapper;
 import arch.hex.client.mapper.HeroDtoMapper;
 import arch.hex.domain.ports.client.hero_api.HeroCreatorApi;
 import arch.hex.domain.ports.client.hero_api.HeroFindAllApi;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import static arch.hex.client.mapper.HeroDtoMapper.heroCreationToDomain;
 
 @RestController

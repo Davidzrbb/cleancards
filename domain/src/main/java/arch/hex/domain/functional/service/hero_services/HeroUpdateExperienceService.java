@@ -24,5 +24,4 @@ public class HeroUpdateExperienceService {
         }
         return heroPersistenceSpi.save(heroWinner);
     }
-
 }

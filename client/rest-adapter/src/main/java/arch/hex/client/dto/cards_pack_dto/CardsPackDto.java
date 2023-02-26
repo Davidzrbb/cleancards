@@ -3,8 +3,6 @@ package arch.hex.client.dto.cards_pack_dto;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import arch.hex.domain.functional.enums.CardsPackType;
 
-import java.util.UUID;
-
 import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.ANY;
 
 @JsonAutoDetect(fieldVisibility = ANY)

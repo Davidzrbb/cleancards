@@ -25,7 +25,6 @@ public class DeckFightService implements DeckFightApi {
     private final HeroUpdateHpService heroUpdateHpService;
     private final HeroUpdateExperienceService heroUpdateExperienceService;
     private final PlayerUpdateWinnerService playerUpdateWinnerService;
-
     private final FightCreatorService fightCreatorService;
 
     public Either<ApplicationError, String> fight(String idDeckAlly, String idDeckEnemy) {
@@ -78,5 +77,4 @@ public class DeckFightService implements DeckFightApi {
                 .allyWin(heroWinner.getIdHero().equals(heroAlly.getIdHero()))
                 .build());
     }
-
 }

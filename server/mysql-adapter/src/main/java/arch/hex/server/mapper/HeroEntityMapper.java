@@ -1,5 +1,7 @@
 package arch.hex.server.mapper;
 
+import arch.hex.domain.functional.enums.Rarity;
+import arch.hex.domain.functional.enums.Speciality;
 import arch.hex.domain.functional.model.Hero;
 import arch.hex.server.entity.HeroEntity;
 
@@ -10,8 +12,8 @@ public interface HeroEntityMapper {
                 .name(entity.getName())
                 .level(entity.getLevel())
                 .xp(entity.getXp())
-                .rarity(entity.getRarity())
-                .speciality(entity.getSpeciality())
+                .rarity(Rarity.valueOf(entity.getRarity()))
+                .speciality(Speciality.valueOf(entity.getSpeciality()))
                 .hp(entity.getHp())
                 .power(entity.getPower())
                 .armor(entity.getArmor())
@@ -24,8 +26,8 @@ public interface HeroEntityMapper {
                 .name(domain.getName())
                 .level(domain.getLevel())
                 .xp(domain.getXp())
-                .rarity(domain.getRarity())
-                .speciality(domain.getSpeciality())
+                .rarity(domain.getRarity().name())
+                .speciality(domain.getSpeciality().name())
                 .hp(domain.getHp())
                 .power(domain.getPower())
                 .armor(domain.getArmor())

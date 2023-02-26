@@ -7,4 +7,3 @@ public class IdGenerationService {
         return UUID.randomUUID().toString();
     }
 }
-

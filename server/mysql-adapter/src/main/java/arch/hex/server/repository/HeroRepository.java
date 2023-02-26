@@ -14,5 +14,5 @@ import static org.springframework.transaction.annotation.Propagation.MANDATORY;
 @Repository
 @Transactional(propagation = MANDATORY)
 public interface HeroRepository extends JpaRepository<HeroEntity, String> {
-    Option<HeroEntity> findHeroEntityByRarity(Rarity rarity);
+    Option<HeroEntity> findHeroEntityByRarity(String rarity);
 }

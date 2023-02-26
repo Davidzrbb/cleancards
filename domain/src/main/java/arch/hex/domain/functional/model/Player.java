@@ -12,6 +12,7 @@ import java.util.UUID;
 public class Player {
     @Default
     String idPlayer = UUID.randomUUID().toString();
+
     String pseudo;
 
     @Default

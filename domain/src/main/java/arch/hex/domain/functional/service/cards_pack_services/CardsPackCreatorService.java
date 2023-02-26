@@ -20,10 +20,10 @@ public class CardsPackCreatorService implements CardsPackCreatorApi {
 
     @Override
     public Either<ApplicationError, CardsPack> create(CardsPackType cardsPackType) {
-        if (cardsPackType.equals(CardsPackType.Silver)) {
+        if (cardsPackType.equals(CardsPackType.SILVER)) {
             return cardsPackPersistenceSpi.save(CardsPack.builder()
                     .idCardsPack(idGenerationService.generateNewId())
-                    .cardsPackType(CardsPackType.Silver)
+                    .cardsPackType(CardsPackType.SILVER)
                     .cardsNumber(3)
                     .legendaryDropRate(0.05)
                     .rareDropRate(0.2)
@@ -33,7 +33,7 @@ public class CardsPackCreatorService implements CardsPackCreatorApi {
         }
         return cardsPackPersistenceSpi.save(CardsPack.builder()
                 .idCardsPack(idGenerationService.generateNewId())
-                .cardsPackType(CardsPackType.Diamond)
+                .cardsPackType(CardsPackType.DIAMOND)
                 .cardsNumber(5)
                 .legendaryDropRate(0.15)
                 .rareDropRate(0.35)

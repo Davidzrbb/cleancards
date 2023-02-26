@@ -3,9 +3,7 @@ package arch.hex.server.entity;
 import com.sun.istack.NotNull;
 import arch.hex.domain.functional.enums.CardsPackType;
 import lombok.*;
-
 import javax.persistence.*;
-import java.util.UUID;
 
 @Entity
 @Getter

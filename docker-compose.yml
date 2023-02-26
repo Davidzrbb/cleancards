@@ -1,0 +1,19 @@
+services:
+  db:
+    image: mariadb
+    restart: always
+    ports:
+        - 3307:3306
+    environment:
+      MARIADB_ROOT_PASSWORD: pwd
+      MARIADB_DATABASE: clean_cards
+      MARIADB_USER: user
+      MARIADB_PASSWORD: password
+    volumes:
+      - datadir:/var/lib/mysql
+      - ./schema.sql:/docker-entrypoint-initdb.d/schema.sql
+    command: --init-file /docker-entrypoint-initdb.d/schema.sql
+
+
+volumes:
+  datadir:

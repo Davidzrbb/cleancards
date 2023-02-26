@@ -40,8 +40,8 @@ public class FightDataBaseAdapterTest {
 
         @Test
         void should_save() {
-            val heroAlly = Hero.builder().idHero(UUID.randomUUID().toString()).name("toto").speciality(Speciality.Tank).rarity(Rarity.Common).hp(10).xp(0).power(1).armor(0).level(1).build();
-            val heroEnemy = Hero.builder().idHero(UUID.randomUUID().toString()).name("tata").speciality(Speciality.Tank).rarity(Rarity.Legendary).hp(100).xp(0).power(1).armor(0).level(1).build();
+            val heroAlly = Hero.builder().idHero(UUID.randomUUID().toString()).name("toto").speciality(Speciality.TANK).rarity(Rarity.COMMON).hp(10).xp(0).power(1).armor(0).level(1).build();
+            val heroEnemy = Hero.builder().idHero(UUID.randomUUID().toString()).name("tata").speciality(Speciality.TANK).rarity(Rarity.LEGENDARY).hp(100).xp(0).power(1).armor(0).level(1).build();
             val fight = Fight.builder().heroAlly(heroAlly).heroEnemy(heroEnemy).allyWin(false).build();
             val entity = FightEntityMapper.fromDomain(fight);
 
@@ -60,8 +60,8 @@ public class FightDataBaseAdapterTest {
 
         @Test
         void should_not_save_if_repository_throw_exception() {
-            val heroAlly = Hero.builder().idHero(UUID.randomUUID().toString()).name("toto").speciality(Speciality.Tank).rarity(Rarity.Common).hp(10).xp(0).power(1).armor(0).level(1).build();
-            val heroEnemy = Hero.builder().idHero(UUID.randomUUID().toString()).name("tata").speciality(Speciality.Tank).rarity(Rarity.Legendary).hp(100).xp(0).power(1).armor(0).level(1).build();
+            val heroAlly = Hero.builder().idHero(UUID.randomUUID().toString()).name("toto").speciality(Speciality.TANK).rarity(Rarity.COMMON).hp(10).xp(0).power(1).armor(0).level(1).build();
+            val heroEnemy = Hero.builder().idHero(UUID.randomUUID().toString()).name("tata").speciality(Speciality.TANK).rarity(Rarity.LEGENDARY).hp(100).xp(0).power(1).armor(0).level(1).build();
             val fight = Fight.builder().heroAlly(heroAlly).heroEnemy(heroEnemy).allyWin(false).build();
             val entity = FightEntityMapper.fromDomain(fight);
             val throwable = new IllegalArgumentException();
@@ -86,8 +86,8 @@ public class FightDataBaseAdapterTest {
         @Test
         void should_find_id_hero() {
             val id = UUID.randomUUID().toString();
-            val heroAlly = Hero.builder().idHero(UUID.randomUUID().toString()).name("toto").speciality(Speciality.Tank).rarity(Rarity.Common).hp(10).xp(0).power(1).armor(0).level(1).build();
-            val heroEnemy = Hero.builder().idHero(UUID.randomUUID().toString()).name("tata").speciality(Speciality.Tank).rarity(Rarity.Legendary).hp(100).xp(0).power(1).armor(0).level(1).build();
+            val heroAlly = Hero.builder().idHero(UUID.randomUUID().toString()).name("toto").speciality(Speciality.TANK).rarity(Rarity.COMMON).hp(10).xp(0).power(1).armor(0).level(1).build();
+            val heroEnemy = Hero.builder().idHero(UUID.randomUUID().toString()).name("tata").speciality(Speciality.TANK).rarity(Rarity.LEGENDARY).hp(100).xp(0).power(1).armor(0).level(1).build();
             val fight = Fight.builder().heroAlly(heroAlly).heroEnemy(heroEnemy).idFight(id).allyWin(false).build();
             val entity = FightEntityMapper.fromDomain(fight);
 
